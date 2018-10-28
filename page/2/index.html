@@ -124,6 +124,10 @@
                             </li>
                         
                             <li role="presentation" class="text-center">
+                                <a href="/categories/"><i class="fa "></i>读书</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
                                 <a href="/archives/"><i class="fa "></i>时间轴</a>
                             </li>
                         
@@ -210,10 +214,88 @@
 
 <article class="post">
     
+        <div class="post-media">
+            <a href="/2018/02/02/编程基础/并行计算简介/">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="https://computing.llnl.gov/tutorials/parallel_comp/images/collaborativeNetworks.jpg"   alt="并行计算简介">
+            </a>
+        </div>
+    
     <div class="post-content">
         <div class="post-head home-post-head">
             <h1 class="post-title">
-                <a href="/2017/09/29/CarbonData 编译打包/">CarbonData 编译打包</a>
+                <a href="/2018/02/02/编程基础/并行计算简介/">并行计算简介</a>
+            </h1>
+            <div class="post-meta">  &bull;
+                <time class="post-date" datetime="" title="">
+                    2018年02月02日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+            
+                什么是并行计算？串行计算
+传统的软件通常被设计成为串行计算模式，具有如下特点：
+一个问题被分解成为一系列离散的指令；
+这些指令被顺次执行；
+所有指令均在一个处理器上被执行；
+在任何时刻，最多只有一个指令能够被执行。
+
+
+
+
+比如：
+并...
+            
+        </p>
+    </div>
+    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/其他">
+            其他
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/其他" title='其他'>
+                        其他
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/2018/02/02/编程基础/并行计算简介/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/2017/09/29/大数据/CarbonData 编译打包/">CarbonData 编译打包</a>
             </h1>
             <div class="post-meta">  &bull;
                 <time class="post-date" datetime="" title="">
@@ -262,7 +344,7 @@
             </div>
 
             <div class="post-permalink">
-                <a href="/2017/09/29/CarbonData 编译打包/" class="btn btn-default">阅读全文</a>
+                <a href="/2017/09/29/大数据/CarbonData 编译打包/" class="btn btn-default">阅读全文</a>
             </div>
         </footer>
     
@@ -274,7 +356,7 @@
     <div class="post-content">
         <div class="post-head home-post-head">
             <h1 class="post-title">
-                <a href="/2016/06/11/Spark SQL功能测试及总结(1.4.1版本)/">Spark SQL功能测试及总结(1.4.1版本)</a>
+                <a href="/2016/06/11/大数据/Spark/Spark SQL功能测试及总结(1.4.1版本)/">Spark SQL功能测试及总结(1.4.1版本)</a>
             </h1>
             <div class="post-meta">  &bull;
                 <time class="post-date" datetime="" title="">
@@ -324,7 +406,7 @@
             </div>
 
             <div class="post-permalink">
-                <a href="/2016/06/11/Spark SQL功能测试及总结(1.4.1版本)/" class="btn btn-default">阅读全文</a>
+                <a href="/2016/06/11/大数据/Spark/Spark SQL功能测试及总结(1.4.1版本)/" class="btn btn-default">阅读全文</a>
             </div>
         </footer>
     
@@ -336,7 +418,7 @@
     <div class="post-content">
         <div class="post-head home-post-head">
             <h1 class="post-title">
-                <a href="/2016/04/02/Kafka数据同步(镜像)工具:kafka mirror maker/">Kafka数据同步(镜像)工具:kafka mirror maker</a>
+                <a href="/2016/04/02/大数据/Kafka数据同步(镜像)工具:kafka mirror maker/">Kafka数据同步(镜像)工具:kafka mirror maker</a>
             </h1>
             <div class="post-meta">  &bull;
                 <time class="post-date" datetime="" title="">
@@ -385,68 +467,7 @@
             </div>
 
             <div class="post-permalink">
-                <a href="/2016/04/02/Kafka数据同步(镜像)工具:kafka mirror maker/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-</article>
-
-
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2015/11/01/HBase 1.1.2 split 策略/">HBase 1.1.2 split 策略</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2015年11月01日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            
-                背景：今天同事用ycsb做HBase的性能测试，反馈说reigon总是在配置的大小前split(配置的是10G)，于是我就给他说起了hbase的spilt策略：从0.94增加了新的策略，还是在会每次flush的时候会去判断需不需要sp...
-            
-        </p>
-    </div>
-    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/大数据">
-            大数据
-        </a>
-    </span>
-    
-
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-                
-                    <a href="/tags/HBase" title='HBase'>
-                        HBase
-                    </a>
-                
-            
-        </span>
-    </span>
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/2015/11/01/HBase 1.1.2 split 策略/" class="btn btn-default">阅读全文</a>
+                <a href="/2016/04/02/大数据/Kafka数据同步(镜像)工具:kafka mirror maker/" class="btn btn-default">阅读全文</a>
             </div>
         </footer>
     
@@ -457,7 +478,7 @@
 
     <nav class="pagination" role="navigation">
         <div id="page-nav">
-            <a class="extend prev" rel="prev" href="/"><i class='fa fa-angle-left'></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class='fa fa-angle-right'></i></a>
+            <a class="extend prev" rel="prev" href="/"><i class='fa fa-angle-left'></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class='fa fa-angle-right'></i></a>
         </div>
     </nav>
 
@@ -502,7 +523,7 @@
     <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
         
-            <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Bloom-Filter/" style="font-size: 10px;">Bloom Filter</a> <a href="/tags/HBase/" style="font-size: 20px;">HBase</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/MarkDown/" style="font-size: 10px;">MarkDown</a> <a href="/tags/Spark/" style="font-size: 15px;">Spark</a> <a href="/tags/其他/" style="font-size: 15px;">其他</a>
+            <a href="/tags/Atom/" style="font-size: 12.5px;">Atom</a> <a href="/tags/Bloom-Filter/" style="font-size: 10px;">Bloom Filter</a> <a href="/tags/HBase/" style="font-size: 20px;">HBase</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/Kafka/" style="font-size: 10px;">Kafka</a> <a href="/tags/MarkDown/" style="font-size: 12.5px;">MarkDown</a> <a href="/tags/Spark/" style="font-size: 15px;">Spark</a> <a href="/tags/其他/" style="font-size: 17.5px;">其他</a> <a href="/tags/数仓/" style="font-size: 10px;">数仓</a>
         
     </div>
   </div>
@@ -512,7 +533,7 @@
         
     <div class="widget">
       <h3 class="title">归档</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">2018年05月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">2018年04月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">2018年03月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/"><i class="fa" aria-hidden="true">2018年02月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">2017年09月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">2016年06月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">2016年04月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/"><i class="fa" aria-hidden="true">2015年11月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/"><i class="fa" aria-hidden="true">2015年09月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">2015年06月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/"><i class="fa" aria-hidden="true">2014年11月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/"><i class="fa" aria-hidden="true">2014年10月</i></a><span class="archive-list-count">1</span></li></ul>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">2018年05月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">2018年04月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">2018年03月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/"><i class="fa" aria-hidden="true">2018年02月</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">2017年09月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">2016年06月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">2016年04月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">2016年03月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/"><i class="fa" aria-hidden="true">2015年11月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/"><i class="fa" aria-hidden="true">2015年09月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/"><i class="fa" aria-hidden="true">2015年08月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">2015年06月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/"><i class="fa" aria-hidden="true">2014年12月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/"><i class="fa" aria-hidden="true">2014年11月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/"><i class="fa" aria-hidden="true">2014年10月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/"><i class="fa" aria-hidden="true">2014年09月</i></a><span class="archive-list-count">1</span></li></ul>
     </div>
 
 
@@ -520,7 +541,7 @@
         
     <div class="widget">
         <h3 class="title">分类</h3>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/其他/"><i class="fa" aria-hidden="true">其他</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/"><i class="fa" aria-hidden="true">大数据</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工程、工具/"><i class="fa" aria-hidden="true">工程、工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程基础/"><i class="fa" aria-hidden="true">编程基础</i></a><span class="category-list-count">1</span></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/其他/"><i class="fa" aria-hidden="true">其他</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/"><i class="fa" aria-hidden="true">大数据</i></a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工程、工具/"><i class="fa" aria-hidden="true">工程、工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数仓/"><i class="fa" aria-hidden="true">数仓</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程基础/"><i class="fa" aria-hidden="true">编程基础</i></a><span class="category-list-count">2</span></li></ul>
     </div>
 
 

@@ -47,16 +47,17 @@ h4,
 h5,
 h6 {
   font-weight: 400;
-  color: #303030;
 }
 h1 {
-  font-size: 2em;
+  font-size: 2.5em;
+  color: #333;  
+  font-weight:bold;  
 }
 h2 {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 h3 {
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 h4 {
   font-size: 1em;
@@ -478,8 +479,8 @@ pre {
 }
 .post .post-body p {
   font-size: 1em;
-  line-height: 1.7;
-  letter-spacing: 0.2px;
+  line-height: 1.5;
+  letter-spacing: 0.1px;
 }
 .post .post-body p img {
   max-width: 100%;
@@ -521,24 +522,32 @@ pre {
 .post-content h1 {
   font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
   color: #333;
-  font-size: 1.8em;
   margin: 0.67em 0;
 }
 .post-content h2 {
   font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
-  color: #333;
+  color: #ffffff;
+  background-color: #6bd3d2;
+  border-color: #00bc9d;
+  border-width: 0px;
+  border-style:solid;
+  border-left-width: 4px;
+  font-weight:bold;
   font-size: 1.5em;
-  margin: 0.83em 0;
+  margin: 0.5em 0;
+  padding: 8px;
 }
 .post-content h3 {
   font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
   color: #333;
-  font-size: 1.17em;
+  font-weight:bold;  
+  font-size: 1.3em;
   margin: 1em 0;
 }
 .post-content h4 {
   font-family:"Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
   color: #333;
+  font-weight:bold;
   font-size: 1em;
   margin: 1.6em 0 1em 0;
 }
@@ -555,7 +564,7 @@ pre {
   margin: 1.6em 0 1em 0;
   font-weight: 500;
 }
-.post-content > h1 {
+.post-content h1 {
   margin-top: 0;
   font-size: 2em;
 }
@@ -1439,7 +1448,7 @@ pre .javascript .function {
     text-align: left;
   }
   .post .post-head h1 {
-    line-height: 1.25em;
+    line-height: 1.2em;
   }
   .post .post-content p.brief {
     text-overflow: ellipsis;

@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="数大招疯">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>如何优雅的关闭Spark Streaming作业 | 数大招疯</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
+
+
+    <link rel="icon" href="img/avatar.jpg">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1536170179765&amp;di=ab07d5f5a24a9d2bab9d1473a74e006c&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F20%2F33%2F9e0ba3e5c577b49250f84a20a11f079c.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='XueMin Zhang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 数大招疯 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">数大招疯</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/编程基础/"><i class="fa "></i>编程基础</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/大数据/"><i class="fa "></i>大数据</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/数据科学"><i class="fa "></i>数据科学</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/图存储、计算"><i class="fa "></i>图存储、计算</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工程、工具"><i class="fa "></i>工程、工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/"><i class="fa "></i>读书</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="如何优雅的关闭Spark Streaming作业">
+            
+	            如何优雅的关闭Spark Streaming作业
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/其他">
+            其他
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/其他" title='其他'>
+                        其他
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/04/20</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>Spark Streaming 应用定位是长期执行的。但如何优雅的关闭它，使正在被处理的消息在作业停止前被妥善处理？很多博文建议我们必须通过JVM关闭的钩子，可在此 查看相关代码。但是，这个方法在新的Spark版本（1.4版本之后）中不能正常工作，并且会引起死锁情况。</p>
+<p>目前有两种方式去优雅的关闭Spark Streaming作业。第一种方法是设置spark.streaming.stopGracefullyOnShutdown参数值为true（默认是false）。这个参数在解决Spark优雅关闭的issue中引入。开发者不再需要去调用ssc.stop()函数，只需要向Driver发送SIGTERM信号。在实践中，我们需要如下操作：</p>
+<p>在Spark UI上找到Driver进程运行在哪个节点。在Yarn Cluster部署模式下，Driver进程和AM运行在同一个Container。<br>登陆运行Driver的节点，并且执行ps -ef |grep java |grep ApplicationMaster 去找到进程ID。请注意，你搜索的字符串可能会因为作业或者环境等原因不同。<br>执行kill -SIGTERM <am-pid> 命令，发送SIGTERM信号给进程。<br>在Spark Driver接收到SIGTERM信号后，你会在日志中看到类似如下的消息：</am-pid></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">17/02/02 01:31:35 ERROR yarn.ApplicationMaster: RECEIVED SIGNAL 15: SIGTERM*</span><br><span class="line">17/02/02 01:31:35 INFO streaming.StreamingContext: Invoking stop(stopGracefully=true) from shutdown hook...</span><br><span class="line">17/02/02 01:31:45 INFO streaming.StreamingContext: StreamingContext stopped successfully**</span><br><span class="line">17/02/02 01:31:45 INFO spark.SparkContext: Invoking stop() from shutdown hook...</span><br><span class="line">17/02/02 01:31:45 INFO spark.SparkContext: Successfully stopped SparkContext...</span><br><span class="line">17/02/02 01:31:45 INFO util.ShutdownHookManager: Shutdown hook called*</span><br></pre></td></tr></table></figure>
+<p>需要注意，默 spark.yarn.maxAppAttempts默认使用Yarn的yarn.resourcemanager.am.max-attempts的值。而yarn.resourcemanager.am.max-attempts值默认为2。因此，在执行kill命令AM第一次停止后，Yarn将会自动启动另一个AM/Driver。你需要第二次kill掉它。你可以在spark-submit设置–conf spark.yarn.maxAppAttempts=1 ，但是你必须考虑清楚，因为如此配置后Driver失败后将没机会重试。</p>
+<p>你不能使用yarn application -kill <applicationid>去kill作业。这个命令不会发送SIGTERM信号给container，而是几乎同时发送SIGKILL信号。SIGTERM和SIGKILL之间的时间间隔可以使用yarn.nodemanager.sleep-delay-before-sigkill.ms (默认 250)去配置。当然，你可以增大该值，但是， 在一定程度上，即使我调整到60000（1分钟），它仍然不起作用。作业的containers几乎是立即被kill掉，并且日志中仅包含如下内容：</applicationid></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">17/02/02 12:12:27 ERROR yarn.ApplicationMaster: RECEIVED SIGNAL 15: SIGTERM*</span><br><span class="line">17/02/02 12:12:27 INFO streaming.StreamingContext: Invoking stop(stopGracefully=true) from shutdown hook*</span><br></pre></td></tr></table></figure>
+<p>所以，我不建议使用yarn application -kill <applicationid> 命令去发送SIGTERM信号。</applicationid></p>
+<p>第二个解决方案是以某种方式通知Spark Streaming应用它需要优雅的关闭，而不是使用SIGTERM信号。一种方式是在HDFS上放一个标识文件，Spark Streaming应用周期性的去检测它。如果标识文件存在了，就调用scc.stop(true, true) 。第一个true意思是Spark context需要被停止。第二个true意思是需要优雅的关闭，允许正在处理的消息完成。</p>
+<p>至关重要的是，不要在micro-batch的代码中调用ssc.stop(true, true)，试想一下，如果你在微批代码中调用ssc.stop(true, true)，它将等待所有正在被处理的消息完成，包括当前正在执行的微批。但是，当前的微批不会结束，直到ssc.stop(true, true)结束返回。这是一种死锁的情况。所以，你必须在另一个线程中执行标识文件检测和调用ssc.stop(true, true)。我在github上放了一个简单的样例，此样例里我在mian线程中在ssc.start()后执行检测和调用ssc.stop() 。你可以在这里找到源码。当然，使用HDFS标识文件仅仅是一种方法，其他可选择的方法有使用一个单独的线程监听一个socket，启动一个RESTful服务等等。</p>
+<p>期待在将来的release中，Spark会考虑更优雅的方案。比如，在Spark UI中可以增加一个按钮，去优雅的停止Spark Streaming作业，这样，我们就不需要凭借定制化的编码或者使用PID和SIGTERM信号了。</p>
+<p>翻译：<a href="http://blog.parseconsulting.com/2017/02/how-to-shutdown-spark-streaming-job.html" target="_blank" rel="noopener">http://blog.parseconsulting.com/2017/02/how-to-shutdown-spark-streaming-job.html</a></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                声明：欢迎转载、重新发布。如用于商业目的，请<a href="mailto:xuemin.zhang@foxmail.com" target="_blank">联系作者</a>获得授权。非商业目的，请务必保留文章作者署名(<a href="https://zhangxuemin.cn" target="_blank">张学敏</a>)及链接(https://zhangxuemin.cn)。
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/04/29/大数据/Spark/开启Back Pressure使生产环境的Spark Streaming应用更稳定、有效/" class="pre-post btn btn-default" title='开启Back Pressure使生产环境的Spark Streaming应用更稳定、有效'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">开启Back Pressure使生产环境的Spark Streaming应用更稳定、有效</span>
+        </a>
+    
+    
+        <a href="/2018/03/28/大数据/HBase/如何避免HBase写入过快引起的各种问题/" class="next-post btn btn-default" title='如何避免HBase写入过快引起的各种问题'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">如何避免HBase写入过快引起的各种问题</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'Wf244rKqAfDvqO3ID8IMPpHC-gzGzoHsz',
+            appKey: 'a3FFMqGAk68xa9qyPfw0Cw6N',
+            placeholder: '发表评论',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: 'zh-CN'.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <p>暂无目录</p>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright">
+    <div class="container">
+    
+
+        Since<span>2015 | <span>ZhangXueMin</span> | <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span>总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
