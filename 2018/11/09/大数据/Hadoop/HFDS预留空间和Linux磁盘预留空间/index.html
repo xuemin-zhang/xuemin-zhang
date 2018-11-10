@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>大数定律 | 数大招疯</title>
+<title>HFDS预留空间和Linux磁盘预留空间 | 数大招疯</title>
 
 
     <link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
@@ -145,9 +145,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="大数定律">
+        <h1 id="HFDS预留空间和Linux磁盘预留空间">
             
-	            大数定律
+	            HFDS预留空间和Linux磁盘预留空间
             
         </h1>
         <div class="post-meta">
@@ -157,8 +157,8 @@
 
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/数据科学">
-            数据科学
+        <a href="/categories/大数据">
+            大数据
         </a>
     </span>
     
@@ -169,8 +169,8 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/概率" title='概率'>
-                        概率
+                    <a href="/tags/Hadoop" title='Hadoop'>
+                        Hadoop
                     </a>
                 
             
@@ -181,7 +181,7 @@
 
         <span>
          
-         🕒 2018年11月05日
+         🕒 2018年11月09日
         </span>
 
        <span>
@@ -201,15 +201,9 @@
     </div>
     
     <div class="post-body post-content">
-        <p>大数定律分为弱大数定律和强大数定律。强、弱大数定律都是在说：随着样本数的增大，用样本的平均数来估计总体的平均数，是靠谱的。</p>
-<h2 id="大数定律的条件"><a href="#大数定律的条件" class="headerlink" title="大数定律的条件"></a>大数定律的条件</h2><p> 强、弱大数定律的前提条件一样：要求独立同分布iid的随机序列，要求其期望存在。</p>
-<h2 id="什么是强、弱大数定律"><a href="#什么是强、弱大数定律" class="headerlink" title="什么是强、弱大数定律"></a>什么是强、弱大数定律</h2><p>弱大数定律比较早被证明出来，弱大数定律表示样本均值“依概率收敛”于总体均值；而强大数定律是比较晚被证明出来的，它证明了样本均值可以“以概率为1收敛”于总体均值。简单的来说，就是数学家先证明了弱大数定律，后来在没有改变前提的情况下把弱大数定律推进了一步，得到了更厉害的强大数定律。</p>
-<h2 id="强、弱大数据定律的区别"><a href="#强、弱大数据定律的区别" class="headerlink" title="强、弱大数据定律的区别"></a>强、弱大数据定律的区别</h2><p>弱、强大数定律的区别在于，前者是“依概率收敛(convergence in probability)”，后者是“几乎确定收敛(almost surely convergence)或以概率为1收敛、几乎处处收敛”。后者比前者强，满足后者的必定满足前者，而满足前者的未必满足后者。</p>
-<ul>
-<li>依概率收敛的例子：考虑下图，图中的每条线都代表一个数列，虚线表示一个非常小的区间。总的来说每个数列都越来越趋近0，且大部分时候不会超过虚线所表示的小边界，但是，偶尔会有一两条线超过虚线、然后再回到虚线之内。而且我们不能保证，有没有哪一个数列会在未来再次超出虚线的范围然后再回来——虽然概率很小。注意虚线的范围可以是任意小的实数，此图中大约是，可以把这个边界缩小到，甚至，随你喜欢，这个性质始终存在。<br><img src="https://pic2.zhimg.com/80/4fa791cc554a7ed57cc8ae195e14a3f1_hd.jpg" alt=""></li>
-<li>几乎处处收敛的例子：图中的黑线表示一个随机数列，这个数列在大约n=200之后进入了一个我们定的小边界（用虚线表示），之后我们可以确定，它再也不会超出虚线所表示的边界（超出这个边界的概率是0）。跟上面的例子一样，虚线所表示的边界可以定得任意小，而一定会有一个n值，当这个数列超过了n值之后，超出这个边界的概率就是0了。<br><img src="https://pic2.zhimg.com/80/797cf511cab76d6911718302632691a1_hd.jpg" alt=""></li>
-</ul>
-<p>内容来源：<a href="https://www.zhihu.com/question/21110761" target="_blank" rel="noopener">https://www.zhihu.com/question/21110761</a> ,作者：runze Zheng</p>
+        <p>组内同学反馈Spark作业提交、写数据失败，日志如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">could only be written to <span class="number">8</span> <span class="keyword">of</span> <span class="number">10</span> the required nodes <span class="keyword">for</span> XXX .</span><br><span class="line">There are <span class="number">254</span> datanode(s) running and no node(s) are excluded <span class="keyword">in</span> <span class="keyword">this</span> operation.</span><br></pre></td></tr></table></figure>
+<p>联系运维说是数据迁移导致1/3老服务器磁盘存储已满，并且DataNode写数据失败。<br>想到HDFS有预留磁盘机制（dfs.datanode.du.reserved）,磁盘写满不应该导致DataNode直接退出啊。所以在页面看了下生产机器的配置情况，发现：<br><img src="https://raw.githubusercontent.com/xuemin-zhang/blog_resource/master/pic/Xnip2018-11-10_15-38-40.jpg" alt=""><br>原来是运维配置错误（说是本想要配置为200G）。<br>看了下磁盘物理大小，发下配置200G也有风险，因为Linux系统中，ext文件系统会默认预留5%的磁盘空间，即4T左右的盘是200G左右，如果HDFS dfs.datanode.du.reserved 参数值小于这个值其实还是会有DataNode写入失败的风险（HFDS认为还有空间可写数据，但Linux系统任务磁盘已满），所以最好是大于磁盘大小*5%一些。</p>
 
     </div>
 
@@ -227,15 +221,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2018/11/09/大数据/Hadoop/HFDS预留空间和Linux磁盘预留空间/" class="pre-post btn btn-default" title='HFDS预留空间和Linux磁盘预留空间'>
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">HFDS预留空间和Linux磁盘预留空间</span>
-        </a>
     
-    
-        <a href="/2018/05/16/大数据/Spark/让Spark Streaming在YARN上长时间运行/" class="next-post btn btn-default" title='让Spark Streaming在YARN上长时间运行'>
+        <a href="/2018/11/05/数据科学/大数定律/" class="next-post btn btn-default" title='大数定律'>
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">让Spark Streaming在YARN上长时间运行</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">大数定律</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
@@ -278,7 +267,7 @@
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#大数定律的条件"><span class="toc-text">大数定律的条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是强、弱大数定律"><span class="toc-text">什么是强、弱大数定律</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强、弱大数据定律的区别"><span class="toc-text">强、弱大数据定律的区别</span></a></li></ol>
+            <p>暂无目录</p>
         
     </div>
 </aside>
