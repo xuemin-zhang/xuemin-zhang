@@ -1,0 +1,438 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="数大招疯">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>并行计算简介 | 数大招疯</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
+
+
+    <link rel="icon" href="img/avatar.jpg">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1536170179765&amp;di=ab07d5f5a24a9d2bab9d1473a74e006c&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F20%2F33%2F9e0ba3e5c577b49250f84a20a11f079c.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='XueMin Zhang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 数大招疯 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">数大招疯</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/编程基础/"><i class="fa "></i>编程基础</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/大数据/"><i class="fa "></i>大数据</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/数据科学"><i class="fa "></i>数据科学</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/图存储、计算"><i class="fa "></i>图存储、计算</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工程、工具"><i class="fa "></i>工程、工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/"><i class="fa "></i>读书</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="并行计算简介">
+            
+	            并行计算简介
+            
+        </h1>
+        <div class="post-meta">
+
+    
+    
+
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/其他">
+            其他
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/其他" title='其他'>
+                        其他
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+
+        <span>
+         
+         🕒 2017年04月02日
+        </span>
+
+       <span>
+         <i class="fa fa-icon-user"></i>
+          ✍ ZhangXueMin
+        </span>
+
+    
+        
+
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="什么是并行计算？"><a href="#什么是并行计算？" class="headerlink" title="什么是并行计算？"></a>什么是并行计算？</h2><h3 id="串行计算"><a href="#串行计算" class="headerlink" title="串行计算"></a>串行计算</h3><ul>
+<li>传统的软件通常被设计成为串行计算模式，具有如下特点：<ul>
+<li>一个问题被分解成为一系列离散的指令；</li>
+<li>这些指令被顺次执行；</li>
+<li>所有指令均在一个处理器上被执行；</li>
+<li>在任何时刻，最多只有一个指令能够被执行。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/serialProblem.gif" alt=""></p>
+<p>比如：<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/serialProblem2.gif" alt=""></p>
+<h3 id="并行计算"><a href="#并行计算" class="headerlink" title="并行计算"></a>并行计算</h3><ul>
+<li>简单来讲，并行计算就是同时使用多个计算资源来解决一个计算问题：<ul>
+<li>一个问题被分解成为一系列可以并发执行的离散部分；</li>
+<li>每个部分可以进一步被分解成为一系列离散指令；</li>
+<li>来自每个部分的指令可以在不同的处理器上被同时执行；</li>
+<li>需要一个总体的控制/协作机制来负责对不同部分的执行情况进行调度。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/parallelProblem.gif" alt=""><br>比如：<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/parallelProblem2.gif" alt=""></p>
+<ul>
+<li>这里的 计算问题 需要具有如下特点：<ul>
+<li>能够被分解成为并发执行离散片段；</li>
+<li>不同的离散片段能够被在任意时刻执行；</li>
+<li>采用多个计算资源的花费时间要小于采用单个计算资源所花费的时间。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>这里的 计算资源 通常包括：<ul>
+<li>具有多处理器/多核(multiple processors/cores)的计算机；</li>
+<li>任意数量的被连接在一起的计算机。</li>
+</ul>
+</li>
+</ul>
+<h2 id="为什么要并行计算？"><a href="#为什么要并行计算？" class="headerlink" title="为什么要并行计算？"></a>为什么要并行计算？</h2><ul>
+<li><p>真实世界就是高度并行的：</p>
+<ul>
+<li>自然界中的万事万物都在并发的，按照其内在时间序列运行着；</li>
+<li>和串行计算相比，并行计算更适用于对现实世界中的复杂现象进行建模，模拟和理解；</li>
+<li>例如，可以想象对这些进行顺序建模：<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/realWorldCollage2.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>主要理由：</p>
+<ul>
+<li>节约时间和成本：<ul>
+<li>理论上来讲，在一个任务上投入更多的资源有利于缩短其完成时间，从而降低成</li>
+<li>并行计算机可以由大量廉价的单机构成，从而节约成本。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/timeMoney2.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>解决更大规模更复杂的问题：</p>
+<ul>
+<li>很多问题的规模和复杂度使得其难以在一个单机上面完成；</li>
+<li>一个有趣的例子：(Grand Challenge Problems)。</li>
+<li>网页搜索引擎/数据库每秒处理百万级别的吞吐量。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/biggerProblems.jpg" alt=""></li>
+</ul>
+</li>
+<li><p>提供并发性：</p>
+<ul>
+<li>单个计算资源某个时间段只能做一件事情，而多计算资源则可以同时做多件事情；</li>
+<li>协同网络可以使得来自世界不同地区的人同时虚拟地沟通。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/collaborativeNetworks.jpg" alt=""></li>
+</ul>
+</li>
+<li>利用非局部的资源：<ul>
+<li>可以利用更广范围中的网络资源；</li>
+<li>SETI@home的例子；以及</li>
+<li>Folding@home的例子。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/SETILogo.jpg" alt=""></li>
+</ul>
+</li>
+<li>更好地利用并行硬件：<ul>
+<li>现代计算机甚至笔记本电脑在架构上都属于多处理器/多核的；</li>
+<li>并行软件已经适用于多核的并行硬件条件，例如线程等；</li>
+<li>在大多数情况下，运行在现代计算机上的串行程序实际上浪费了大量的计算资源。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/xeon5600processorDie3.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="概念和术语"><a href="#概念和术语" class="headerlink" title="概念和术语"></a>概念和术语</h2><h3 id="冯诺依曼体系结构"><a href="#冯诺依曼体系结构" class="headerlink" title="冯诺依曼体系结构"></a>冯诺依曼体系结构</h3><p>以匈牙利数学家约翰·冯诺依曼命名的这一计算机体系结构，出现在他1945年发表的一篇论文中。这也通常被称为“存储程序计算机”——程序指令和数据都被保存在存储器中，这与早期通过“硬接线”编程的计算机不同。从此以后，所有的计算机遵从这一基本架构：<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/vonNeumann1.gif" alt=""></p>
+<p>这里写图片描述  这里写图片描述</p>
+<ul>
+<li>四个组成部分：<ul>
+<li>内存</li>
+<li>控制器</li>
+<li>处理器</li>
+<li>输入输出</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>读写操作：支持随机存储的内存用来同时保存程序指令和数据：<ul>
+<li>程序指令用来指导计算机操作；</li>
+<li>数据是程序用来操作的对象。</li>
+</ul>
+</li>
+<li>控制器：从内存中读取指令或者数据，对这些指令进行解码并且顺序执行这些指令。</li>
+<li>处理器：提供基本的算术和逻辑操作。</li>
+<li>输入输出设备：是人机交互的接口。</li>
+</ul>
+<p>那么冯诺依曼体系结构和并行计算有什么关系呢？答案是：并行计算机仍然遵从这一基本架构，只是处理单元多于一个而已，其它的基本架构完全保持不变。</p>
+<h3 id="弗林的经典分类"><a href="#弗林的经典分类" class="headerlink" title="弗林的经典分类"></a>弗林的经典分类</h3><p>有不同的方法对并行计算机进行分类（具体例子可参见并行计算分类）。</p>
+<p>一种被广泛采用的分类被称为弗林经典分类，诞生于1966年。弗林分类法从指令流和数据流两个维度区分多处理器计算机体系结构。每个维度有且仅有两个状态：单个或者多个。</p>
+<p>下面个矩阵定义了弗林分类的四个可能状态：<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/flynnsTaxonomy.gif" alt=""></p>
+<p>单指令单数据(SISD)： SISD是标准意义上的串行机，具有如下特点：1）单指令：在每一个时钟周期内，CPU只能执行一个指令流；2）单数据：在每一个时钟周期内，输入设备只能输入一个数据流；3）执行结果是确定的。这是最古老的一种计算机类型。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/sisd2.gif" alt=""></p>
+<p>单指令多数据(SIMD)： SIMD属于一种类型的并行计算机，具有如下特点：1）单指令：所有处理单元在任何一个时钟周期内都执行同一条指令；2）多数据：每个处理单元可以处理不同的数据元素；3）非常适合于处理高度有序的任务，例如图形/图像处理；4）同步（锁步）及确定性执行；5）两个主要类型：处理器阵列和矢量管道。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/simd3.gif" alt=""><br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/simd.gif" alt=""><br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/simd2.gif" alt=""><br><strong>多指令单数据(MISD)：</strong>MISD属于一种类型的并行计算机，具有如下特点：1）多指令：不同的处理单元可以独立地执行不同的指令流；2）单数据：不同的处理单元接收的是同一单数据流。这种架构理论上是有的，但是工业实践中这种机型非常少。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/misd4.gif" alt=""><br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/misd.gif" alt=""></p>
+<p>多指令多数据(MIMD)： MIMD属于最常见的一种类型的并行计算机，具有如下特点：1）多指令：不同的处理器可以在同一时刻处理不同的指令流；2）多数据：不同的处理器可以在同一时刻处理不同的数据；3）执行可以是同步的，也可以是异步的，可以是确定性的，也可以是不确定性的。这是目前主流的计算机架构类型，目前的超级计算机、并行计算机集群系统，网格，多处理器计算机，多核计算机等都属于这种类型。值得注意的是，许多MIMD类型的架构中实际也可能包括SIMD的子架构。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/mimd2.gif" alt=""><br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/mimd.gif" alt=""></p>
+<h2 id="并行计算机的内存架构"><a href="#并行计算机的内存架构" class="headerlink" title="并行计算机的内存架构"></a>并行计算机的内存架构</h2><h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>一般特征： 共享内存的并行计算机虽然也分很多种，但是通常而言，它们都可以让所有处理器以全局寻址的方式访问所有的内存空间。多个处理器可以独立地操作，但是它们共享同一片内存。一个处理器对内存地址的改变对其它处理器来说是可见的。根据内存访问时间，可以将已有的共享内存机器分为统一内存存取和非统一内存存取两种类型。</p>
+<p>统一内存存取(Uniform Memory Access)： 目前更多地被称为对称多处理器机器(Symmetric Multiprocessor (SMP))，每个处理器都是相同的，并且其对内存的存取和存取之间都是无差别的。有时候也会被称为CC-UMA (Cache coherent - UMA)。缓存想干意味着如果一个处理器更新共享内存中的位置，则所有其它处理器都会了解该更新。缓存一致性是在硬件级别上实现的。</p>
+<p><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/shared_mem.gif" alt=""></p>
+<p>非统一内存存取(Non-Uniform Memory Access)： 通常由两个或者多个物理上相连的SMP。一个SMP可以存取其它SMP上的内存。不是所有处理器对所有内存都具有相同的存取或者存取时间。通过连接而进行内存存取速度会更慢一些。如果缓存相缓存想干的特性在这里仍然被保持，那么也可以被称为CC-NUMA。</p>
+<p><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/numa.gif" alt=""></p>
+<p>优点：全局地址空间提供了一种用户友好的编程方式，并且由于内存与CPU的阶级程度，使得任务之间的数据共享既快速又统一。</p>
+<p>缺点：最大的缺点是内存和CPU之间缺少较好的可扩展性。增加更多的CPU意味着更加共享内存和缓存想干系统上的存取流量，从而几何级别地增加缓存/内存管理的工作量。同时也增加了程序员的责任，因为他需要确保全局内存“正确”的访问以及同步。</p>
+<h3 id="分布式内存"><a href="#分布式内存" class="headerlink" title="分布式内存"></a>分布式内存</h3><p>一般概念： 分布式内存架构也可以分为很多种，但是它们仍然有一些共同特征。分布式内存结构需要通讯网络，将不同的内存连接起来。一般而言，处理器会有它们所对应的内存。一个处理器所对应的内存地址不会映射到其它处理器上，所以在这种分布式内存架构中，不存在各个处理器所共享的全局内存地址。<br><img src="https://computing.llnl.gov/tutorials/parallel_comp/images/distributed_mem.gif" alt=""></p>
+<p>由于每个处理器具有它所对应的局部内存，所以它们可以独立进行操作。一个本地内存上所发生的变化并不会被其它处理器所知晓。因此，缓存想干的概念在分布式内存架构中并不存在。</p>
+<p>如果一个处理器需要对其它处理器上的数据进行存取，那么往往程序员需要明确地定义数据通讯的时间和方式，任务之间的同步因此就成为程序员的职责。尽管分布式内存架构中用于数据传输的网络结构可以像以太网一样简单，但在实践中它们的变化往往也很大。</p>
+<p>优点： 1）内存可以随着处理器的数量而扩展，增加处理器的数量的同时，内存的大小也在成比例地增加；2）每个处理器可以快速地访问自己的内存而不会受到干扰，并且没有维护全局告诉缓存一致性所带来的开销；3）成本效益：可以使用现有的处理器和网络。</p>
+<p>缺点： 1）程序员需要负责处理器之间数据通讯相关的许多细节；2）将基于全局内存的现有数据结构映射到该分布式内存组织可能会存在困难；3）非均匀的内存访问时间——驻留在远程结点上的数据比本地结点上的数据需要长的多的访问时间。</p>
+<h3 id="混合分布式-共享内存"><a href="#混合分布式-共享内存" class="headerlink" title="混合分布式-共享内存"></a>混合分布式-共享内存</h3><p>一般概念： 目前世界上最大和最快的并行计算机往往同时具有分布式和共享式的内存架构。共享式内存架构可以是共线内存机器或者图形处理单元(GPU)。分布式内存组件可以是由多个共享内存/GPU连接而成的系统。每个结点只知道自己的内存，不知道网络上其它结点的内存。因此，需要在不同的机器上通过网络进行数据通讯。</p>
+<p>从目前的趋势来看，这种混合式的内存架构将长期占有主导地位，并且成为高端计算在可见的未来中的最好选择。</p>
+<p>优缺点： 1）继承了共享式内存和分布式内存的优缺点；2）优点之一是可扩展性；3）缺点之一是编程的复杂性。</p>
+<p>翻译：<a href="https://computing.llnl.gov/tutorials/parallel_comp/" target="_blank" rel="noopener">https://computing.llnl.gov/tutorials/parallel_comp/</a></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                声明：欢迎转载、重新发布。如用于商业目的，请<a href="mailto:xuemin.zhang@foxmail.com" target="_blank">联系作者</a>获得授权。非商业目的，请务必保留文章作者署名(<a href="https://zhangxuemin.cn" target="_blank">张学敏</a>)及链接(https://zhangxuemin.cn)。
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/05/29/大数据/Spark/开启Back Pressure使生产环境的Spark Streaming应用更稳定、有效/" class="pre-post btn btn-default" title='开启Back Pressure使生产环境的Spark Streaming应用更稳定、有效'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">开启Back Pressure使生产环境的Spark Streaming应用更稳定、有效</span>
+        </a>
+    
+    
+        <a href="/2016/10/26/大数据-Hadoop-HDFS符号链接和硬链接/" class="next-post btn btn-default" title='HDFS符号链接和硬链接'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">HDFS符号链接和硬链接</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'Wf244rKqAfDvqO3ID8IMPpHC-gzGzoHsz',
+            appKey: 'a3FFMqGAk68xa9qyPfw0Cw6N',
+            placeholder: '发表评论',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: 'zh-CN'.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是并行计算？"><span class="toc-text">什么是并行计算？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#串行计算"><span class="toc-text">串行计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并行计算"><span class="toc-text">并行计算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要并行计算？"><span class="toc-text">为什么要并行计算？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念和术语"><span class="toc-text">概念和术语</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#冯诺依曼体系结构"><span class="toc-text">冯诺依曼体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弗林的经典分类"><span class="toc-text">弗林的经典分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并行计算机的内存架构"><span class="toc-text">并行计算机的内存架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#共享内存"><span class="toc-text">共享内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分布式内存"><span class="toc-text">分布式内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#混合分布式-共享内存"><span class="toc-text">混合分布式-共享内存</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright">
+    <div class="container">
+    
+
+        Since<span>2015 | <span>ZhangXueMin</span> | <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span>总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
