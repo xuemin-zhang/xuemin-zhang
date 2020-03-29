@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="数大招疯">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>HDFS小文件处理--文件归档Archive | 数大招疯</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
+
+
+    <link rel="icon" href="img/avatar.jpg">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1536170179765&amp;di=ab07d5f5a24a9d2bab9d1473a74e006c&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F20%2F33%2F9e0ba3e5c577b49250f84a20a11f079c.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='XueMin Zhang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 数大招疯 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">数大招疯</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/编程基础/"><i class="fa "></i>编程基础</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/大数据/"><i class="fa "></i>大数据</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/数据科学"><i class="fa "></i>数据科学</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/图存储、计算"><i class="fa "></i>图存储、计算</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工程、工具"><i class="fa "></i>工程、工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/"><i class="fa "></i>读书</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="HDFS小文件处理--文件归档Archive">
+            
+	            HDFS小文件处理--文件归档Archive
+            
+        </h1>
+        <div class="post-meta">
+
+    
+    
+
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/大数据">
+            大数据
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Kafka" title='Kafka'>
+                        Kafka
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+
+        <span>
+         
+         🕒 2015年04月02日
+        </span>
+
+       <span>
+         <i class="fa fa-icon-user"></i>
+          ✍ ZhangXueMin
+        </span>
+
+    
+        
+
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>Hadoop并不擅长对小型文件的储存，原因取决于Hadoop文件系统的文件管理机制，Hadoop的文件存储的单元为一个块（block），block的数据存放在集群中的datanode节点上，由namenode对所有datanode存储的block进行管理。namenode将所有block的元数据存放在内存中，以方便快速的响应客户端的请求。那么问题来了，不管一个文件有多小，Hadoop都把它视为一个block，大量的小文件，将会把namenode的内存耗尽。<br>那么如何对大量的小文件进行有效的处理呢？Hadoop的优秀工程师们其实已经为我们考虑好了，Hadoop提供了一个叫Archive归档工具，Archive可以把多个文件归档成为一个文件，换个角度来看，Archive实现了文件的元数据整理，但是，归档的文件大小其实没有变化，只是压缩了文件的元数据大小。</p>
+<h2 id="归档小文件"><a href="#归档小文件" class="headerlink" title="归档小文件"></a>归档小文件</h2><p>使用命令：<br><code>hadoop archive -archiveName test.har -p /user/archive/test /user/har</code></p>
+<p>参数含义：<br>-archiveName 指定归档文件名；<br>-p    指定要进行归档目录的父目录，支持同时归档多个子目录；<br>/user/archive/test    归档文件的目录<br>/user/har    归档文件存放的目录</p>
+<h2 id="查看归档文件"><a href="#查看归档文件" class="headerlink" title="查看归档文件"></a>查看归档文件</h2><p>har文件采用一套不同于hdfs的路径协议。基本格式为：har://&lt;hdfs路径&gt;。在未添加协议url时，我们看到的是har文件在HDFS中的底层形式，加上协议头后我们可以看到其目录结构与源目录结构相同。<br><code>hadoop fs -ls -R har:///user/har/test.har</code></p>
+<h2 id="归档的不足"><a href="#归档的不足" class="headerlink" title="归档的不足"></a>归档的不足</h2><p>1、archive不支持压缩，所以归档前后占用空间没有减少；<br>2、archive一旦创建就不能进行修改；<br>3、archive虽然解决了namenode的空间问题，但是，在执行mapreduce时，会把多个小文件交给同一个mapreduce去split，这会降低mapreduce的效率。</p>
+<h2 id="解除归档"><a href="#解除归档" class="headerlink" title="解除归档"></a>解除归档</h2><p>如果需要修改文件或者想提升mapreduce处理的效率，可以考虑将数据解除归档。<br><code>hadoop distcp har:///user/har/test.har /user/tmp/test</code></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                声明：欢迎转载、重新发布。如用于商业目的，请<a href="mailto:xuemin.zhang@foxmail.com" target="_blank">联系作者</a>获得授权。非商业目的，请务必保留文章作者署名(<a href="https://zhangxuemin.cn" target="_blank">张学敏</a>)及链接(https://zhangxuemin.cn)。
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2015/04/25/编程基础/简单、高效的数据结构--Bloom Filter(布隆过滤器)/" class="pre-post btn btn-default" title='简单、高效的数据结构--Bloom Filter(布隆过滤器)'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">简单、高效的数据结构--Bloom Filter(布隆过滤器)</span>
+        </a>
+    
+    
+        <a href="/2014/11/12/大数据/HBase/HBase0.96 升级步骤及源代码分析/" class="next-post btn btn-default" title='HBase0.96 升级步骤及源代码分析'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">HBase0.96 升级步骤及源代码分析</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'Wf244rKqAfDvqO3ID8IMPpHC-gzGzoHsz',
+            appKey: 'a3FFMqGAk68xa9qyPfw0Cw6N',
+            placeholder: '发表评论',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: 'zh-CN'.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#归档小文件"><span class="toc-text">归档小文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看归档文件"><span class="toc-text">查看归档文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#归档的不足"><span class="toc-text">归档的不足</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解除归档"><span class="toc-text">解除归档</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright">
+    <div class="container">
+    
+
+        Since<span>2015 | <span>ZhangXueMin</span> | <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span>总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
