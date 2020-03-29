@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>如何避免HBase写入过快引起的各种问题 | 数大招疯</title>
+<title>2017年个人总结 | 数大招疯</title>
 
 
     <link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
@@ -145,9 +145,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="如何避免HBase写入过快引起的各种问题">
+        <h1 id="2017年个人总结">
             
-	            如何避免HBase写入过快引起的各种问题
+	            2017年个人总结
             
         </h1>
         <div class="post-meta">
@@ -157,8 +157,8 @@
 
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/大数据">
-            大数据
+        <a href="/categories/其他">
+            其他
         </a>
     </span>
     
@@ -169,8 +169,8 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/HBase" title='HBase'>
-                        HBase
+                    <a href="/tags/其他" title='其他'>
+                        其他
                     </a>
                 
             
@@ -181,7 +181,7 @@
 
         <span>
          
-         🕒 2018年04月12日
+         🕒 2018年02月02日
         </span>
 
        <span>
@@ -201,21 +201,19 @@
     </div>
     
     <div class="post-body post-content">
-        <p>首先我们简单回顾下整个写入流程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">client api ==&gt; RPC ==&gt;  server IPC ==&gt; RPC queue ==&gt; RPC handler ==&gt; write WAL ==&gt; write memstore ==&gt; flush to  filesystem</span><br></pre></td></tr></table></figure></p>
-<p>整个写入流程从客户端调用API开始，数据会通过protobuf编码成一个请求，通过scoket实现的IPC模块被送达server的RPC队列中。最后由负责处理RPC的handler取出请求完成写入操作。写入会先写WAL文件，然后再写一份到内存中，也就是memstore模块，当满足条件时，memstore才会被flush到底层文件系统，形成HFile。</p>
-<p>当写入过快时会遇见什么问题？写入过快时，memstore的水位会马上被推高。你可能会看到以下类似日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RegionTooBusyException: Above memstore limit, regionName=xxxxx ...</span><br></pre></td></tr></table></figure></p>
-<p>这个是Region的memstore占用内存大小超过正常的4倍，这时候会抛异常，写入请求会被拒绝，客户端开始重试请求。当达到128M的时候会触发flush memstore，当达到128M * 4还没法触发flush时候会抛异常来拒绝写入。两个相关参数的默认值如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hbase.hregion.memstore.flush.size=128M</span><br><span class="line">hbase.hregion.memstore.block.multiplier=4</span><br></pre></td></tr></table></figure></p>
-<p>或者这样的日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">regionserver.MemStoreFlusher: Blocking updates on hbase.example.host.com,16020,1522286703886: the global memstore size 1.3 G is &gt;= than blocking 1.3 G size</span><br><span class="line">regionserver.MemStoreFlusher: Memstore is above high water mark and block 528ms</span><br></pre></td></tr></table></figure></p>
-<p>这是所有region的memstore内存总和开销超过配置上限，默认是配置heap的40%，这会导致写入被阻塞。目的是等待flush的线程把内存里的数据flush下去，否则继续允许写入memestore会把内存写爆<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hbase.regionserver.global.memstore.upperLimit=0.4  # 较旧版本，新版本兼容</span><br><span class="line">hbase.regionserver.global.memstore.size=0.4 # 新版本</span><br></pre></td></tr></table></figure></p>
-<p>当写入被阻塞，队列会开始积压，如果运气不好最后会导致OOM，你可能会发现JVM由于OOM crash或者看到如下类似日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ipc.RpcServer: /192.168.x.x:16020 is unable to read call parameter from client 10.47.x.x</span><br><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br></pre></td></tr></table></figure></p>
-<p>HBase这里我认为有个很不好的设计，捕获了OOM异常却没有终止进程。这时候进程可能已经没法正常运行下去了，你还会在日志里发现很多其它线程也抛OOM异常。比如stop可能根本stop不了，RS可能会处于一种僵死状态。</p>
-<p>如何避免RS OOM？一种是加快flush速度：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hbase.hstore.blockingWaitTime = 90000 ms</span><br><span class="line">hbase.hstore.flusher.count = 2</span><br><span class="line">hbase.hstore.blockingStoreFiles = 10</span><br></pre></td></tr></table></figure></p>
-<p>当达到hbase.hstore.blockingStoreFiles配置上限时，会导致flush阻塞等到compaction工作完成。阻塞时间是hbase.hstore.blockingWaitTime，可以改小这个时间。hbase.hstore.flusher.count可以根据机器型号去配置，可惜这个数量不会根据写压力去动态调整，配多了，非导入数据多场景也没用，改配置还得重启。</p>
-<p>同样的道理，如果flush加快，意味这compaction也要跟上，不然文件会越来越多，这样scan性能会下降，开销也会增大。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hbase.regionserver.thread.compaction.small = 1</span><br><span class="line">hbase.regionserver.thread.compaction.large = 1</span><br></pre></td></tr></table></figure></p>
-<p>增加compaction线程会增加CPU和带宽开销，可能会影响正常的请求。如果不是导入数据，一般而言是够了。好在这个配置在云HBase内是可以动态调整的，不需要重启。</p>
-<p>上述配置都需要人工干预，如果干预不及时server可能已经OOM了，这时候有没有更好的控制方法？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hbase.ipc.server.max.callqueue.size = 1024 * 1024 * 1024 # 1G</span><br></pre></td></tr></table></figure></p>
-<p>直接限制队列堆积的大小。当堆积到一定程度后，事实上后面的请求等不到server端处理完，可能客户端先超时了。并且一直堆积下去会导致OOM，1G的默认配置需要相对大内存的型号。当达到queue上限，客户端会收到CallQueueTooBigException 然后自动重试。通过这个可以防止写入过快时候把server端写爆，有一定反压作用。线上使用这个在一些小型号稳定性控制上效果不错。</p>
-<p>转载：<a href="https://my.oschina.net/u/3770361/blog/1793324" target="_blank" rel="noopener">https://my.oschina.net/u/3770361/blog/1793324</a></p>
+        <p>恍恍惚惚，18年已过一个月。作为严重的拖延症患者，近两周才对17年做了整体的回顾，做了组内的绩效沟通，今天也抽空做下个人方面的总结。</p>
+<p>对于工作，与往年比较雷同，有项目成功的喜悦，也有项目延期、流产的无奈与自责；有与Team小伙伴一起成长的开心和自豪，也有小伙伴分别的难过和惆怅；有与同事协同攻关的艰辛与幸福，也有与同事争吵、摩擦后的委屈与懊悔；有苛求完美、力求成功的踌躇满志，也有思想上的“开小差”与面对选择时的纠结与迷惘……</p>
+<p>对于个人成长，16年年底曾给自己设立了两个个人目标，分别是读书与跑步。回头看下两个目标：</p>
+<h4 id="关于读书，一个字总结：乱"><a href="#关于读书，一个字总结：乱" class="headerlink" title="关于读书，一个字总结：乱"></a>关于读书，一个字总结：乱</h4><p>一个是读书介质乱，有纸质书、有kindle、有ipad、有熊猫学院、有微信读书。</p>
+<p>一个是书的“类型”乱，有工作周边的《看穿一切数字的统计学》、《白话大数据与机器学习》、《大数据之路》；有比较热门的《未来简史》，有传记、历史类 的《杜月笙传》、《朱德传》、《曾国藩正面与侧面》、《让你爱不释手的极简中国史》、《地球的红飘带》；有推理名家东野圭吾的《梦幻花》、《白夜行》、《幻夜》、《假面饭店》以及热播电视剧《人民的名义》；也读了梁晓声的《年轮》和蕾秋·乔伊斯的《一个人的朝圣》以及周小波的《黄金时代》、《三十而立》、《逝水流年》。当然，也有因为难度及兴趣问题还未读完的一些书，如《机器学习（西瓜书）》、《数据的本质》、《金字塔原理》、《腾讯传》等。</p>
+<h4 id="关于跑步，一个字总结：懒"><a href="#关于跑步，一个字总结：懒" class="headerlink" title="关于跑步，一个字总结：懒"></a>关于跑步，一个字总结：懒</h4><p>16年底定的目标17年跑步500公里，实际上一年下来却跑步不足300公里。也找了没有达到目标的原因，其中有鼻子的问题，但最大的原因在于本身的惰性。曾在夏季夜跑过，也在周六日尝试过晨跑，但都没有坚持下来，所以，18年这个是需要自己去克服的问题，加强锻炼身体的意识，养成一个健康生活的习惯。</p>
+<p>整体来讲，对17年读书目标完成度比较满意，计划10本，实际完成19本。虽然跑步目标完成度不好，但也越来越意识到身体健康的重要性，介于之前小病都不是病，抗一抗总会过去的认知，一直透支健康，最终留下鼻炎的后患，也切身体会到5年前同事所说 的“每次呼吸都是痛”。很多时候工作拼的是你储备的知识也有你的体能，身体很重要，且行且珍惜。</p>
+<h4 id="在此也定下18年的个人目标："><a href="#在此也定下18年的个人目标：" class="headerlink" title="在此也定下18年的个人目标："></a>在此也定下18年的个人目标：</h4><ul>
+<li>读书：20本非技术、工具书</li>
+<li>跑步：年跑量达到600公里</li>
+<li>写文章：每月至少一篇原创或者翻译的文章</li>
+<li>减肥：体检时候不再属于偏胖体质</li>
+</ul>
 
     </div>
 
@@ -233,15 +231,15 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2018/08/05/数据科学/概率导论：一、样本空间与概率/" class="pre-post btn btn-default" title='概率导论：一、样本空间与概率'>
+        <a href="/2018/04/12/大数据/HBase/如何避免HBase写入过快引起的各种问题/" class="pre-post btn btn-default" title='如何避免HBase写入过快引起的各种问题'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">概率导论：一、样本空间与概率</span>
+            <span class="hidden-xs">如何避免HBase写入过快引起的各种问题</span>
         </a>
     
     
-        <a href="/2018/02/02/其他/2017年个人总结/" class="next-post btn btn-default" title='2017年个人总结'>
+        <a href="/2017/09/29/大数据/CarbonData 编译打包/" class="next-post btn btn-default" title='CarbonData 编译打包'>
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">2017年个人总结</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">CarbonData 编译打包</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
@@ -284,7 +282,7 @@
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <p>暂无目录</p>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#关于读书，一个字总结：乱"><span class="toc-text">关于读书，一个字总结：乱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关于跑步，一个字总结：懒"><span class="toc-text">关于跑步，一个字总结：懒</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在此也定下18年的个人目标："><span class="toc-text">在此也定下18年的个人目标：</span></a></li></ol>
         
     </div>
 </aside>
