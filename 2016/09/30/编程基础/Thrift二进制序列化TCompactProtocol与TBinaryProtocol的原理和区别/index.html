@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="数大招疯">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Thrift二进制序列化TCompactProtocol与TBinaryProtocol的原理和区别 | 数大招疯</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
+
+
+    <link rel="icon" href="img/avatar.jpg">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1536170179765&amp;di=ab07d5f5a24a9d2bab9d1473a74e006c&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F20%2F33%2F9e0ba3e5c577b49250f84a20a11f079c.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='XueMin Zhang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 数大招疯 </h2>
+            
+    	</div>
+    </div>
+</header>
+
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">数大招疯</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/编程基础/"><i class="fa "></i>编程基础</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/大数据/"><i class="fa "></i>大数据</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/数据科学"><i class="fa "></i>数据科学</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/图存储、计算"><i class="fa "></i>图存储、计算</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/工程、工具"><i class="fa "></i>工程、工具</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/"><i class="fa "></i>读书</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Thrift二进制序列化TCompactProtocol与TBinaryProtocol的原理和区别">
+            
+	            Thrift二进制序列化TCompactProtocol与TBinaryProtocol的原理和区别
+            
+        </h1>
+        <div class="post-meta">
+
+    
+    
+
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/编程基础">
+            编程基础
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Thrift" title='Thrift'>
+                        Thrift
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+
+        <span>
+         
+         🕒 2016年09月30日
+        </span>
+
+       <span>
+         <i class="fa fa-icon-user"></i>
+          ✍ ZhangXueMin
+        </span>
+
+    
+        
+
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>Thrift二进制序列化协议中,默认为TBinaryProtocol,关于TCompactProtocol的说明,为高效密集型的二进制序列化(varint).那么TCompactProtocol相对于TBinaryProtocol是怎样做到高效密集的呢?TCompactProtocol是否一定比TBinaryProtocol高效?</p>
+<h4 id="我们以比较常用的i32类型为例-来解释一下两种方式各自的原理"><a href="#我们以比较常用的i32类型为例-来解释一下两种方式各自的原理" class="headerlink" title="我们以比较常用的i32类型为例,来解释一下两种方式各自的原理:"></a>我们以比较常用的i32类型为例,来解释一下两种方式各自的原理:</h4><h5 id="TBinaryProtocol"><a href="#TBinaryProtocol" class="headerlink" title="TBinaryProtocol"></a>TBinaryProtocol</h5><p>处理i32整型数据类型时,定义的是4个字节的数组,32位的长度正好可以保存到这4个字节组当中.如果我们分别以n1~n32来表示第1位到第32位,那么这个数组的数据结构应该为以下结构:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i32out[0] &#123;n1  ~ n8 &#125;</span><br><span class="line">i32out[1] &#123;n9  ~ n16&#125;</span><br><span class="line">i32out[2] &#123;n17 ~ n24&#125;</span><br><span class="line">i32out[3] &#123;n25 ~ n32&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样的实现很简单.<br>对于其它类型,比如i16,也是类似的原理,不过是以2个字节的数组保存,在此不再说明了.</p>
+<h5 id="TCompactProtocol"><a href="#TCompactProtocol" class="headerlink" title="TCompactProtocol"></a>TCompactProtocol</h5><p>在处理i32整型数据类型时,与TBinaryProtocol完全不同,采用的是1~5个字节组来保存.依然以n1~n32来表示第1位到第32位,数据结构应该为以下结构:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i32out[0] &#123;1 , 0 , 0 , 0 , n1 ~ n4&#125;</span><br><span class="line">i32out[1] &#123;1 , n5 ~ n11&#125;</span><br><span class="line">i32out[2] &#123;1 , n12 ~ n18&#125;</span><br><span class="line">i32out[3] &#123;1 , n19  ~ n25&#125;</span><br><span class="line">i32out[4] &#123;0 , n26  ~ n32&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这是一种极端情况,5个字节全部占满.</p>
+<p>很显然,这样做比TBinaryProtocol复杂得多,而且还多了1个字节,并没有达到密集的目的.那是不是说明TBinaryProtocol更好?先不急着下结论,举个具体一点的例子来说明两种实现的区别.<br>假如我们需要序列化一个十进制数值’10’,那么它的二进制表示方式应该为’1010’,只用了4位,但i32会在前面自动补0,则是’00000000000000000000000000001010’,那么如果使用TBinaryProtocol方式来保存,则应该为以下结构:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i32out[0] &#123;0 , 0 , 0 , 0 , 0 , 0 , 0 , 0&#125;</span><br><span class="line">i32out[1] &#123;0 , 0 , 0 , 0 , 0 , 0 , 0 , 0&#125;</span><br><span class="line">i32out[2] &#123;0 , 0 , 0 , 0 , 0 , 0 , 0 , 0&#125;</span><br><span class="line">i32out[3] &#123;0 , 0 , 0 , 0 , 1 , 0 , 1 , 0&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样有什么问题呢?那就是大量补足的0占用了宝贵空间.<br>接着我们再来看看TCompactProtocol会怎样保存’10’这个数值:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i32out[0] &#123;0 , 0 , 0 , 0 , 1 , 0 , 1 , 0&#125;</span><br></pre></td></tr></table></figure></p>
+<p>TCompactProtocol只用了1个字节,而TBinaryProtocol依然用了4个字节.这就是为什么说TCompactProtocol高效密集型的二进制序列化的原因.</p>
+<h4 id="接着我们来分析一下TCompactProtocol的保存规则"><a href="#接着我们来分析一下TCompactProtocol的保存规则" class="headerlink" title="接着我们来分析一下TCompactProtocol的保存规则."></a>接着我们来分析一下TCompactProtocol的保存规则.</h4><p>TCompactProtocol每个字节的第1位是状态位,第2位到第8位保存具体的数据.这有别于TBinaryProtocol的1到8位全部保存具体数据.这也是为什么极端情况下TCompactProtocol比TBinaryProtocol多占1个字节的原因.<br>TCompactProtocol的字节中第1位状态位的意思是标记此字节后是否还有数据.1为有数据,0为没有数据.<br>为了更容易理解,我们再举一个例子.<br>用TCompactProtocol来序列化十进制数值’300’,二进制应该为’100101100’,用TCompactProtocol方式来保存则为如下结构:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">i32out[0] &#123;1 , 0 , 0 , 0 , 0 , 0 , 1 , 0&#125;</span><br><span class="line">i32out[1] &#123;0 , 0 , 1 , 0 , 1 , 1 , 0 , 0&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里将’100101100’拆分为了2部分,’10’和’0101100’,在i32out[0]中保存了’10’,并在第1位记为’1’来表示后面还有,第7位和第8位保存’10’,不足的几位(第2位到第6位)补0,所以i32out[0]为’10000010’,在i32out[1]中保存了后面的’0101100’,并在第1位记为’0’来表示后面没有了,则第1位为’0’,所以i32out[1]为’00101100’.<br>TCompactProtocol以这样的原理来达到压缩的目的.</p>
+<p>最后引用一张图来展示TCompactProtocol的i32数据(‘106903’数值序列化后)的结构:<br><img src="https://static.oschina.net/uploads/space/2016/0926/194645_9dmf_766562.png" alt=""></p>
+<h4 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h4><p>TCompactProtocol在数据量较小的情况下比TBinaryProtocol序列化更省空间.<br>在i32数值或者string的长度大于’2097151’时(二进制21个’1’),与TBinaryProtocol方式占用的空间一样,都是4个字节.<br>在i32数值或者string的长度大于’268435455’时(二进制28个’1’),TCompactProtocol反而会比TBinaryProtocol多占用1个字节的空间.(其它数据类型依此类推,不做阐述了)</p>
+<p>来源：<a href="https://my.oschina.net/venwyhk/blog/751790" target="_blank" rel="noopener">https://my.oschina.net/venwyhk/blog/751790</a></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                声明：欢迎转载、重新发布。如用于商业目的，请<a href="mailto:xuemin.zhang@foxmail.com" target="_blank">联系作者</a>获得授权。非商业目的，请务必保留文章作者署名(<a href="https://zhangxuemin.cn" target="_blank">张学敏</a>)及链接(https://zhangxuemin.cn)。
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2016/10/26/大数据-Hadoop-HDFS符号链接和硬链接/" class="pre-post btn btn-default" title='HDFS符号链接和硬链接'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">HDFS符号链接和硬链接</span>
+        </a>
+    
+    
+        <a href="/2016/07/29/大数据/Spark/Parquet简介/" class="next-post btn btn-default" title='深入浅出Parquet Schema'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">深入浅出Parquet Schema</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'Wf244rKqAfDvqO3ID8IMPpHC-gzGzoHsz',
+            appKey: 'a3FFMqGAk68xa9qyPfw0Cw6N',
+            placeholder: '发表评论',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: 'zh-CN'.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#我们以比较常用的i32类型为例-来解释一下两种方式各自的原理"><span class="toc-text">我们以比较常用的i32类型为例,来解释一下两种方式各自的原理:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#TBinaryProtocol"><span class="toc-text">TBinaryProtocol</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#TCompactProtocol"><span class="toc-text">TCompactProtocol</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接着我们来分析一下TCompactProtocol的保存规则"><span class="toc-text">接着我们来分析一下TCompactProtocol的保存规则.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结一下"><span class="toc-text">总结一下</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="copyright">
+    <div class="container">
+    
+
+        Since<span>2015 | <span>ZhangXueMin</span> | <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span>总访问量<span id="busuanzi_value_site_pv"></span>次
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
