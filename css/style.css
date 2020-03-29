@@ -329,7 +329,9 @@ pre {
   color: #505050;
   line-height: 4em;
   display: block;
-  padding: 0 21px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight:bold;
 }
 .main-navigation .menu li:hover > a {
   color: #e67e22;
@@ -521,13 +523,13 @@ pre {
 }
 .post-content h1 {
   font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
+  font-size: 3.5em;
   color: #333;
   margin: 0.67em 0;
 }
 .post-content h2 {
   font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
-  color: #ffffff;
-  background-color: #6bd3d2;
+  background-color: #f9f9f9;
   border-color: #00bc9d;
   border-width: 0px;
   border-style:solid;
@@ -561,12 +563,12 @@ pre {
   font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
   color: #333;
   font-size: 1em;
-  margin: 1.6em 0 1em 0;
-  font-weight: 500;
+  margin: 1em 0 1em 0;
+  font-weight: 100;
 }
 .post-content h1 {
   margin-top: 0;
-  font-size: 2em;
+  font-size: 2.5em;
 }
 .post-content p {
   font-size: 15px;
@@ -1448,7 +1450,7 @@ pre .javascript .function {
     text-align: left;
   }
   .post .post-head h1 {
-    line-height: 1.2em;
+    line-height: 2.3em;
   }
   .post .post-content p.brief {
     text-overflow: ellipsis;
