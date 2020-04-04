@@ -1,0 +1,327 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="数大招疯">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.1">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+<meta name="keywords" content="Maven" />
+
+
+<meta name="description" content="1.源码分析1&lt;artifactId&gt;maven-pmd-plugin&lt;/artifactId&gt;
+2.代码格式检查1&lt;artifactId&gt;maven-che..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Maven常用外部插件 |
+    
+    数大招疯
+</title>
+
+<link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1536170179765&amp;di=ab07d5f5a24a9d2bab9d1473a74e006c&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F20%2F33%2F9e0ba3e5c577b49250f84a20a11f079c.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='XueMin Zhang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                数大招疯
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">
+                        数大招疯</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/编程语言/"><i class="fa "></i>
+                                编程语言</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/大数据/"><i class="fa "></i>
+                                大数据</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/数据科学"><i class="fa "></i>
+                                数据科学</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/图存储、计算"><i class="fa "></i>
+                                图存储、计算</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/工程、工具"><i class="fa "></i>
+                                工程、工具</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Maven常用外部插件">
+            
+            Maven常用外部插件
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/工程、工具/">工程、工具</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Maven/">Maven</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2015/09/16</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>1.源码分析<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;artifactId&gt;maven-pmd-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2.代码格式检查<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;artifactId&gt;maven-checkstyle-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>3.代码相似度检查<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;simian-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>4.格式化统计报告<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;jdepend-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>5.FireBug检查<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;findbugs-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>6.JavaDoc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;artifactId&gt;maven-javadoc-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>7.生成Java代码交叉引用和源代码的html格式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;artifactId&gt;maven-jxr-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>8.代码覆盖率<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;cobertura-maven-plugin&lt;/artifactId&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;emma-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>9.Java代码的度量工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;javancss-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>10.单元测试报告<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;artifactId&gt;maven-surefire-report-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>11.TODO检查报告<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;taglist-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>12.项目总报告<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;artifactId&gt;maven-project-info-reports-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Maven-Common-Plugin"><a href="#Maven-Common-Plugin" class="headerlink" title="=========Maven Common Plugin========="></a>=========Maven Common Plugin=========</h3><p>1.SCP文件传输<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.github.goldin&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;copy-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2.SSH命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.github.goldin&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;sshexec-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>3.Maven Job<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.github.goldin&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;jenkins-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>4.生成about信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.github.goldin&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;about-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>5.查找重复依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.github.goldin&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;duplicates-finder-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>6.Maven邮件发送<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.github.goldin&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;mail-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>7.项目目录查找<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.github.goldin&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;find-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>8.获取SVN版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.google.code.maven-svn-revision-number-plugin&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;maven-svn-revision-number-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>9.编译C++<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;native-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>10.DDL生成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;hibernate3-maven-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Maven-Official-Plugin"><a href="#Maven-Official-Plugin" class="headerlink" title="=========Maven Official Plugin========="></a>=========Maven Official Plugin=========</h3><p>1.自动定义打包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2.ANT<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            声明：
+            欢迎转载、重新发布。如用于商业目的，请<a href="mailto:xuemin.zhang@foxmail.com" target="_blank">联系作者</a>获得授权。非商业目的，请务必保留文章作者署名(<a href="https://zhangxuemin.cn" target="_blank">张学敏</a>)及链接(https://zhangxuemin.cn)。
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2015/10/16/工程、工具/Maven可执行jar包/" class="pre-post btn btn-default" title='Maven可执行jar包'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Maven可执行jar包</span>
+    </a>
+    
+    
+    <a href="/2015/09/02/大数据/HBase/HBase 1.0 Java 客户端 api(hbase 1.0 增删改查，建表、删表等)/" class="next-post btn btn-default" title='HBase 1.0 Java 客户端 api(hbase 1.0 增删改查，建表、删表等)'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            HBase 1.0 Java 客户端 api(hbase 1.0 增删改查，建表、删表等)</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<div id="vcomments" class="valine"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'Wf244rKqAfDvqO3ID8IMPpHC-gzGzoHsz',
+    appKey: 'a3FFMqGAk68xa9qyPfw0Cw6N',
+    placeholder: '发表评论',
+    notify: false,
+    verify: false,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven-Common-Plugin"><span class="toc-text">=========Maven Common Plugin=========</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven-Official-Plugin"><span class="toc-text">=========Maven Official Plugin=========</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2015
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>
