@@ -108,8 +108,8 @@
                         </li>
                         
                         <li role="presentation" class="text-center">
-                            <a href="/categories/编程语言/"><i class="fa "></i>
-                                编程语言</a>
+                            <a href="/categories/编程基础/"><i class="fa "></i>
+                                编程基础</a>
                         </li>
                         
                         <li role="presentation" class="text-center">
@@ -147,128 +147,292 @@
         <div class="container">
             <div class="row">
                 <main class="col-md-8 main-content ">
-                    <ol class="breadcrumb">
+                    <h6 class= "tag category ">
     
-    <li>
         HBase
-    </li>
     
     
-</ol>
+    <style>
+        h6{
+            background: #ed7e34;
+            padding: 12px;
+            color: #ffffff;
+            font-weight:bold;
+            font-size: 1.1em;
+            border-radius:5px 5px 5px 5px;
+        }
+    </style>
 
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2018/04/12/大数据/HBase/如何避免HBase写入过快引起的各种问题/">
-                    如何避免HBase写入过快引起的各种问题</a>
-            </h1>
-            <div class="post-meta"> &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年04月12日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            
-            首先我们简单回顾下整个写入流程1client api ==&amp;gt; RPC ==&amp;gt;  server IPC ==&amp;gt; RPC queue ==&amp;gt; RPC handler ==&amp;gt; write WAL ==&amp;gt; ...
-            
-        </p>
-    </div>
-</article>
+</h6>
 
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2015/11/01/大数据/HBase/HBase 1.1.2 split 策略/">
-                    HBase 1.1.2 split 策略</a>
-            </h1>
-            <div class="post-meta"> &bull;
-                <time class="post-date" datetime="" title="">
-                    2015年11月01日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            
-            背景：今天同事用ycsb做HBase的性能测试，反馈说reigon总是在配置的大小前split(配置的是10G)，于是我就给他说起了hbase的spilt策略：从0.94增加了新的策略，还是在会每次flush的时候会去判断需不需要sp...
-            
-        </p>
-    </div>
-</article>
 
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2015/09/02/大数据/HBase/HBase 1.0 Java 客户端 api(hbase 1.0 增删改查，建表、删表等)/">
-                    HBase 1.0 Java 客户端 api(hbase 1.0 增删改查，建表、删表等)</a>
-            </h1>
-            <div class="post-meta"> &bull;
-                <time class="post-date" datetime="" title="">
-                    2015年09月02日
-                </time>
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title">
+                    <a href="/2018/04/12/大数据/HBase/如何避免HBase写入过快引起的各种问题/">如何避免HBase写入过快引起的各种问题</a>
+                </h1>
+
             </div>
+            <p class="brief">
+                
+                    首先我们简单回顾下整个写入流程1client api ==&amp;gt; RPC ==&amp;gt;  server IPC ==&amp;gt; RPC queue ==&amp;gt; RPC handler ==&amp;gt; write WAL ==&amp;gt; ...
+                
+            </p>
         </div>
-        <p class="brief">
-            
-            说明：1.第一部分为代码2.第二部分为工程pom文件
+
+
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+      
+
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/大数据">
+            大数据
+        </a>
+    </span>
+    
+
+    
+    <span>
+
+     🕒 2018年04月12日
+    </span>
+
+
+
+    
+</div>
+
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/2018/04/12/大数据/HBase/如何避免HBase写入过快引起的各种问题/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title">
+                    <a href="/2015/11/01/大数据/HBase/HBase 1.1.2 split 策略/">HBase 1.1.2 split 策略</a>
+                </h1>
+
+            </div>
+            <p class="brief">
+                
+                    背景：今天同事用ycsb做HBase的性能测试，反馈说reigon总是在配置的大小前split(配置的是10G)，于是我就给他说起了hbase的spilt策略：从0.94增加了新的策略，还是在会每次flush的时候会去判断需不需要sp...
+                
+            </p>
+        </div>
+
+
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+      
+
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/大数据">
+            大数据
+        </a>
+    </span>
+    
+
+    
+    <span>
+
+     🕒 2015年11月01日
+    </span>
+
+
+
+    
+</div>
+
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/2015/11/01/大数据/HBase/HBase 1.1.2 split 策略/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title">
+                    <a href="/2015/09/02/大数据/HBase/HBase 1.0 Java 客户端 api(hbase 1.0 增删改查，建表、删表等)/">HBase 1.0 Java 客户端 api(hbase 1.0 增删改查，建表、删表等)</a>
+                </h1>
+
+            </div>
+            <p class="brief">
+                
+                    说明：1.第一部分为代码2.第二部分为工程pom文件
 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495...
-            
-        </p>
-    </div>
-</article>
-
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2014/11/12/大数据/HBase/HBase0.96 升级步骤及源代码分析/">
-                    HBase0.96 升级步骤及源代码分析</a>
-            </h1>
-            <div class="post-meta"> &bull;
-                <time class="post-date" datetime="" title="">
-                    2014年11月12日
-                </time>
-            </div>
+                
+            </p>
         </div>
-        <p class="brief">
-            
-            测试的升级环境为cdh4.3 升级到社区版 Hadoop2.2/HBase0.96。
+
+
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+      
+
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/大数据">
+            大数据
+        </a>
+    </span>
+    
+
+    
+    <span>
+
+     🕒 2015年09月02日
+    </span>
+
+
+
+    
+</div>
+
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/2015/09/02/大数据/HBase/HBase 1.0 Java 客户端 api(hbase 1.0 增删改查，建表、删表等)/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title">
+                    <a href="/2014/11/12/大数据/HBase/HBase0.96 升级步骤及源代码分析/">HBase0.96 升级步骤及源代码分析</a>
+                </h1>
+
+            </div>
+            <p class="brief">
+                
+                    测试的升级环境为cdh4.3 升级到社区版 Hadoop2.2/HBase0.96。
 一、验证HDFS和Zookeeper已正常运行（HDFS and ZooKeeper must be up!）
 二、在集群中任一服务器上执行hbas...
-            
-        </p>
-    </div>
-</article>
-
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2014/10/02/大数据/HBase/HBase数据模型(Data Model)/">
-                    HBase数据模型(Data Model)</a>
-            </h1>
-            <div class="post-meta"> &bull;
-                <time class="post-date" datetime="" title="">
-                    2014年10月02日
-                </time>
-            </div>
+                
+            </p>
         </div>
-        <p class="brief">
-            
-            在HBase中，数据存储在有行有列的二维表。HBase中的表是与关系型数据库重复的术语，但这个类比对我们理解HBase来说帮助不大。将HBase的表当做一个多层的Map，反而会可以容易理解。
+
+
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+      
+
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/大数据">
+            大数据
+        </a>
+    </span>
+    
+
+    
+    <span>
+
+     🕒 2014年11月12日
+    </span>
+
+
+
+    
+</div>
+
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/2014/11/12/大数据/HBase/HBase0.96 升级步骤及源代码分析/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title">
+                    <a href="/2014/10/02/大数据/HBase/HBase数据模型(Data Model)/">HBase数据模型(Data Model)</a>
+                </h1>
+
+            </div>
+            <p class="brief">
+                
+                    在HBase中，数据存储在有行有列的二维表。HBase中的表是与关系型数据库重复的术语，但这个类比对我们理解HBase来说帮助不大。将HBase的表当做一个多层的Map，反而会可以容易理解。
 HBase数据模型相关术语Table（表）...
-            
-        </p>
-    </div>
-</article>
+                
+            </p>
+        </div>
+
+
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+      
+
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/大数据">
+            大数据
+        </a>
+    </span>
+    
+
+    
+    <span>
+
+     🕒 2014年10月02日
+    </span>
+
+
+
+    
+</div>
+
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/2014/10/02/大数据/HBase/HBase数据模型(Data Model)/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+
+    </article>
+ 
+
+
+
 
 
                 </main>
@@ -335,7 +499,7 @@ HBase数据模型相关术语Table（表）...
     <h3 class="title">
         分类
     </h3>
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/其他/"><i class="fa" aria-hidden="true">其他</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/大数据/"><i class="fa" aria-hidden="true">大数据</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工程、工具/"><i class="fa" aria-hidden="true">工程、工具</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数仓/"><i class="fa" aria-hidden="true">数仓</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据科学/"><i class="fa" aria-hidden="true">数据科学</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程基础/"><i class="fa" aria-hidden="true">编程基础</i></a><span class="category-list-count">4</span></li></ul>
+    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/其他/"><i class="fa" aria-hidden="true">其他</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/"><i class="fa" aria-hidden="true">大数据</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工程、工具/"><i class="fa" aria-hidden="true">工程、工具</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数仓/"><i class="fa" aria-hidden="true">数仓</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据科学/"><i class="fa" aria-hidden="true">数据科学</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程基础/"><i class="fa" aria-hidden="true">编程基础</i></a><span class="category-list-count">4</span></li></ul>
 </div>
 
     
@@ -387,34 +551,28 @@ HBase数据模型相关术语Table（表）...
 <a id="back-to-top" class="icon-btn hide">
     <i class="fa fa-chevron-up"></i>
 </a>
-    <div class="copyright">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="busuanzi">
-    
-</div>
-            </div>
-            <div class="col-sm-12">
-                <span>Copyright &copy;
-                    2015
-                    
-                </span> |
-                <span>
-                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
-                </span> |
-                <span>
-                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
-                </span>
-            </div>
-        </div>
+        Since<span>2015 | <span>ZhangXueMin</span> | <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span>总访问量
+        <span id="busuanzi_value_site_pv"></span>次
     </div>
 </div>
+
+
+
+
+
+
+
+
 
 <script src="/js/search.js?rev=@@hash"></script>
 
 
 
 <script src="/js/app.js?rev=@@hash"></script>
+
 </body>
 </html>

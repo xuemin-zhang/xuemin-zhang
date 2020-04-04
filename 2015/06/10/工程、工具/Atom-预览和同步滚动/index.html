@@ -108,8 +108,8 @@
                         </li>
                         
                         <li role="presentation" class="text-center">
-                            <a href="/categories/编程语言/"><i class="fa "></i>
-                                编程语言</a>
+                            <a href="/categories/编程基础/"><i class="fa "></i>
+                                编程基础</a>
                         </li>
                         
                         <li role="presentation" class="text-center">
@@ -157,11 +157,16 @@
         </h1>
         <div class="post-meta">
     
+      
+
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a class="category-link" href="/categories/工程、工具/">工程、工具</a>
+        <a href="/categories/工程、工具">
+            工程、工具
+        </a>
     </span>
     
+
     
     <span class="fa-wrap">
         <i class="fa fa-tags"></i>
@@ -172,16 +177,21 @@
         </span>
     </span>
     
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">
-            2015/06/10</span>
+    <span>
+
+     🕒 2015年06月10日
     </span>
+
+
+
+    
+    
+
+
     
     
 </div>
+
         
         
     </div>
@@ -189,16 +199,16 @@
     <div class="post-body post-content">
         <h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><p>Atom是github专门为程序员推出的一个跨平台文本编辑器，于2015年1月8日<a href="https://github.com/atom/atom" target="_blank" rel="noopener">开源</a>，<a href="https://atom.io/" target="_blank" rel="noopener">官方</a>slogan为”A hackable text editor for the 21st Century”，其相对其他IDE算是比较轻量的，启动速度比较快，也提供了很多功能插件和主题。其用户界面简洁、直观，支持Windows、Mac、Linux 三大桌面平台，原生支持HTML、JavaScript、CSS、Node.js等前端应用编程语言，并且有Java、C#、PHP等语言的插件。相对其他IDE，其还有个特点，就是完全免费。</p>
 <p>我没依赖其进行项目开发，就不在此详细聊其功能。我主要使用MarkDown功能，相对其他MarkDown编辑器，其支持类似Sublime等其他IDE项目管理的方式管理MarkDown文件，并且语言完全支持<a href="https://github.github.com/gfm/" target="_blank" rel="noopener">GitHub Flavored Markdown</a>。本文主要聊下Atom对MarkDown的支持及优化（插件化的功能），以及遇到的问题。</p>
-<h2 id="二、简要设置（for-Mac用户）"><a href="#二、简要设置（for-Mac用户）" class="headerlink" title="二、简要设置（for Mac用户）"></a>二、简要设置（for Mac用户）</h2><h3 id="2-1调整主题"><a href="#2-1调整主题" class="headerlink" title="2.1调整主题"></a>2.1调整主题</h3>
-<h3 id="2-2安装插件"><a href="#2-2安装插件" class="headerlink" title="2.2安装插件"></a>2.2安装插件</h3>
+<h2 id="二、简要设置（for-Mac用户）"><a href="#二、简要设置（for-Mac用户）" class="headerlink" title="二、简要设置（for Mac用户）"></a>二、简要设置（for Mac用户）</h2><h3 id="2-1调整主题"><a href="#2-1调整主题" class="headerlink" title="2.1调整主题"></a>2.1调整主题</h3><img src="/2015/06/10/工程、工具/Atom-预览和同步滚动/atom1.gif">
+<h3 id="2-2安装插件"><a href="#2-2安装插件" class="headerlink" title="2.2安装插件"></a>2.2安装插件</h3><img src="/2015/06/10/工程、工具/Atom-预览和同步滚动/atom2.gif">
 <h2 id="三、MarkDown功能插件"><a href="#三、MarkDown功能插件" class="headerlink" title="三、MarkDown功能插件"></a>三、MarkDown功能插件</h2><h3 id="3-1增强预览-markdown-preview-plus"><a href="#3-1增强预览-markdown-preview-plus" class="headerlink" title="3.1增强预览 markdown-preview-plus"></a>3.1增强预览 markdown-preview-plus</h3><p>Atom自带的Markdown预览插件markdown-preview功能比较简单，markdown-preview-plus对其做了功能扩展和增强。</p>
 <ul>
 <li>支持预览实时渲染。(Ctrl + Shift + M)</li>
 <li>支持Latex公式。(Ctrl + Shift + X)</li>
 </ul>
-<p>使用该插件前，需要先禁用markdown-preview。<br><br></p>
-<h3 id="3-2同步滚动-markdown-scroll-sync"><a href="#3-2同步滚动-markdown-scroll-sync" class="headerlink" title="3.2同步滚动 markdown-scroll-sync"></a>3.2同步滚动 markdown-scroll-sync</h3><p>配合预览功能使用，预览后需要修改某个地方时候，能够方便的找到代码位置。<br></p>
-<h3 id="3-3代码增强-language-markdown"><a href="#3-3代码增强-language-markdown" class="headerlink" title="3.3代码增强(language-markdown)"></a>3.3代码增强(language-markdown)</h3><p>一般的MarkDown编辑器都会提供代码高亮功能，初此外该插件提供了快捷生产代码等功能。<br></p>
+<p>使用该插件前，需要先禁用markdown-preview。<br><img src="/2015/06/10/工程、工具/Atom-预览和同步滚动/atom3.gif"><br><img src="/2015/06/10/工程、工具/Atom-预览和同步滚动/atom4.gif"></p>
+<h3 id="3-2同步滚动-markdown-scroll-sync"><a href="#3-2同步滚动-markdown-scroll-sync" class="headerlink" title="3.2同步滚动 markdown-scroll-sync"></a>3.2同步滚动 markdown-scroll-sync</h3><p>配合预览功能使用，预览后需要修改某个地方时候，能够方便的找到代码位置。<br><img src="/2015/06/10/工程、工具/Atom-预览和同步滚动/atom5.gif"></p>
+<h3 id="3-3代码增强-language-markdown"><a href="#3-3代码增强-language-markdown" class="headerlink" title="3.3代码增强(language-markdown)"></a>3.3代码增强(language-markdown)</h3><p>一般的MarkDown编辑器都会提供代码高亮功能，初此外该插件提供了快捷生产代码等功能。<br><img src="/2015/06/10/工程、工具/Atom-预览和同步滚动/atom6.gif"></p>
 <h3 id="3-4其他插件"><a href="#3-4其他插件" class="headerlink" title="3.4其他插件"></a>3.4其他插件</h3><p>以上是几个与MarkDown比较相关的几个插件，Atom官方还提供了很多其他功能插件，详见：<a href="https://atom.io/packages" target="_blank" rel="noopener">https://atom.io/packages</a></p>
 <h2 id="四、遇到的问题"><a href="#四、遇到的问题" class="headerlink" title="四、遇到的问题"></a>四、遇到的问题</h2><p>按如上方式安装完markdown-scroll-sync后，有如下提示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TypeError: Right-hand side of &apos;instanceof&apos; is not callable</span><br><span class="line">    at /packages/markdown-scroll-sync/lib/main.coffee:38:14</span><br></pre></td></tr></table></figure></p>
 <p>在官网issues中找到原因是与markdown-preview-plus有版本冲突，解决方案是卸载高版本的plus插件，命令行安装指定版本，命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apm install markdown-preview-plus@2.4.16</span><br></pre></td></tr></table></figure></p>
@@ -246,11 +256,11 @@
 new Valine({
     av: AV,
     el: '#vcomments',
-    appId: 'Wf244rKqAfDvqO3ID8IMPpHC-gzGzoHsz',
-    appKey: 'a3FFMqGAk68xa9qyPfw0Cw6N',
-    placeholder: '发表评论',
+    appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+    appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+    placeholder: '说点什么吧',
     notify: false,
-    verify: false,
+    verify: true,
     avatar: 'mm',
     meta: 'nick,mail'.split(','),
     pageSize: '10',
@@ -287,32 +297,26 @@ new Valine({
 <a id="back-to-top" class="icon-btn hide">
     <i class="fa fa-chevron-up"></i>
 </a>
-    <div class="copyright">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="busuanzi">
-    
-</div>
-            </div>
-            <div class="col-sm-12">
-                <span>Copyright &copy;
-                    2015
-                    
-                </span> |
-                <span>
-                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
-                </span> |
-                <span>
-                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
-                </span>
-            </div>
-        </div>
+        Since<span>2015 | <span>ZhangXueMin</span> | <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span>总访问量
+        <span id="busuanzi_value_site_pv"></span>次
     </div>
 </div>
 
 
 
+
+
+
+
+
+
+
+
 <script src="/js/app.js?rev=@@hash"></script>
+
 </body>
 </html>
