@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN">
+
 <head>
     <!--Setting-->
     <meta charset="UTF-8">
@@ -13,11 +14,15 @@
     <meta name="format-detection" content="telephone=no,email=no,adress=no">
     <meta name="browsermode" content="application">
     <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.1">
+    <meta name="root" content="/">
     <link rel="dns-prefetch" href="http://yoursite.com">
     <!--SEO-->
 
+<meta name="keywords" content="Spark" />
 
 
+<meta name="description" content="背景spark sql在项目中使用越来越多，spark sql都支持哪些功能？官网没有明确说明，只能在class SqlParserd代码中看到一些Keyword，所以准备测试下spark对常用..." />
 
 
 <meta name="robots" content="all" />
@@ -26,34 +31,30 @@
 <meta name="verify" content="all" />
     <!--Title-->
 
+<title>
+    
+    Spark SQL功能测试及总结(1.4.1版本) |
+    
+    数大招疯
+</title>
 
-<title>Spark SQL功能测试及总结(1.4.1版本) | 数大招疯</title>
+<link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
 
 
-    <link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
-
-
-    <link rel="icon" href="img/avatar.jpg">
+<link rel="icon" href="/favicon.ico">
 
     
-
-
 
 <link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
 <link rel="stylesheet" href="/css/style.css?rev=@@hash">
-
-
-
-
     
-	<div class="hide">
-		<script type="text/javascript">
-			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
-		</script>
-	</div>
-
-
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
 
 
 
@@ -61,8 +62,6 @@
     
 
 </head>
-
-
 <!--[if lte IE 8]>
 <style>
     html{ font-size: 1em }
@@ -71,66 +70,77 @@
 <!--[if lte IE 9]>
 <div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
 <![endif]-->
-
 <body>
-    <header class="main-header"  style="background-image:url(https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1536170179765&amp;di=ab07d5f5a24a9d2bab9d1473a74e006c&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F20%2F33%2F9e0ba3e5c577b49250f84a20a11f079c.jpg)"  >
+    <header class="main-header"  style="background-image:url(
+    https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1536170179765&amp;di=ab07d5f5a24a9d2bab9d1473a74e006c&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F20%2F33%2F9e0ba3e5c577b49250f84a20a11f079c.jpg)"
+     >
     <div class="main-header-box">
         <a class="header-avatar" href="/" title='XueMin Zhang'>
             <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
         </a>
         <div class="branding">
-        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
             
-                <h2> 数大招疯 </h2>
+            <h2>
+                数大招疯
+            </h2>
             
-    	</div>
+        </div>
     </div>
 </header>
-
     <nav class="main-navigation">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
-                    <span class="sr-only"></span>
+                        <span class="sr-only"></span>
                         <i class="fa fa-bars"></i>
                     </span>
-                    <a class="navbar-brand" href="http://yoursite.com">数大招疯</a>
+                    <a class="navbar-brand" href="http://yoursite.com">
+                        数大招疯</a>
                 </div>
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation" class="text-center">
-                                <a href="/"><i class="fa "></i>首页</a>
-                            </li>
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
                         
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/编程基础/"><i class="fa "></i>编程基础</a>
-                            </li>
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/编程基础/"><i class="fa "></i>
+                                编程基础</a>
+                        </li>
                         
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/大数据/"><i class="fa "></i>大数据</a>
-                            </li>
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/大数据/"><i class="fa "></i>
+                                大数据</a>
+                        </li>
                         
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/数据科学"><i class="fa "></i>数据科学</a>
-                            </li>
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/数据科学"><i class="fa "></i>
+                                数据科学</a>
+                        </li>
                         
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/图存储、计算"><i class="fa "></i>图存储、计算</a>
-                            </li>
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/图存储、计算"><i class="fa "></i>
+                                图存储、计算</a>
+                        </li>
                         
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/工程、工具"><i class="fa "></i>工程、工具</a>
-                            </li>
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/工程、工具"><i class="fa "></i>
+                                工程、工具</a>
+                        </li>
                         
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/"><i class="fa "></i>读书</a>
-                            </li>
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/打卡"><i class="fa "></i>
+                                打卡</a>
+                        </li>
                         
-                            <li role="presentation" class="text-center">
-                                <a href="/archives/"><i class="fa "></i>时间轴</a>
-                            </li>
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
                         
                     </ul>
                 </div>
@@ -147,13 +157,12 @@
     <div class="post-head">
         <h1 id="Spark SQL功能测试及总结(1.4.1版本)">
             
-	            Spark SQL功能测试及总结(1.4.1版本)
+            Spark SQL功能测试及总结(1.4.1版本)
             
         </h1>
         <div class="post-meta">
-
     
-    
+      
 
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
@@ -168,36 +177,28 @@
         <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-                
-                    <a href="/tags/Spark" title='Spark'>
-                        Spark
-                    </a>
-                
+            <a class="tag-link" href="/tags/Spark/">Spark</a>
             
         </span>
     </span>
     
+    <span>
+
+     🕒 2016年06月11日
+    </span>
 
 
-        <span>
-         
-         🕒 2016年06月11日
-        </span>
-
-       <span>
-         <i class="fa fa-icon-user"></i>
-          ✍ ZhangXueMin
-        </span>
 
     
-        
+    
 
-        
+
+    
     
 </div>
 
-            
-            
+        
+        
     </div>
     
     <div class="post-body post-content">
@@ -228,11 +229,13 @@
 <p>说明：union 排重<br>四、代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.sql.types._</span><br><span class="line">import org.apache.spark.sql.&#123;Row, SQLContext&#125;</span><br><span class="line">import org.apache.spark.&#123;SparkConf, SparkContext&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by xuemin.zhang on 16/6/12.</span><br><span class="line"> */</span><br><span class="line">object SqlTestOnParquet &#123;</span><br><span class="line">  def main(args: Array[String]) &#123;</span><br><span class="line">    val conf = new SparkConf().setMaster(&quot;local&quot;).setAppName(&quot;test&quot;)</span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    val ssc = new SQLContext(sc)</span><br><span class="line"></span><br><span class="line">    val products_data = Array(</span><br><span class="line">      &quot;BR01,BRS01,8 inch teddy bear,5.99,8 inch teddy bear,comes with cap and jacket&quot;,</span><br><span class="line">      &quot;BR02,BRS01,12 inch teddy bear,8.99,12 inch teddy bear,comes with cap and jacket&quot;,</span><br><span class="line">      &quot;BR03,BRS01,18 inch teddy bear,11.99,18 inch teddy bear,comes with cap and jacket&quot;,</span><br><span class="line">      &quot;BNBG01,DLL01,Fish bean bag toy,3.49,Fish bean bag toy,complete with bean bag worms with which to feed it&quot;,</span><br><span class="line">      &quot;BNBG02,DLL01,Bird bean bag toy,3.49,Bird bean bag toy,eggs are not included&quot;,</span><br><span class="line">      &quot;BNBG03,DLL01,Rabbit bean bag toy,3.49,Rabbit bean bag toy,comes with bean bag carrots&quot;,</span><br><span class="line">      &quot;RGAN01,DLL01,Raggedy Ann,4.990,18 inch Raggedy Ann doll&quot;,</span><br><span class="line">      &quot;RYL01,FNG01,King doll,9.49,12 inch king doll with royal garments and crown&quot;,</span><br><span class="line">      &quot;RYL02,FNG01,Queen doll,9.49,12 inch queen doll with royal garments and crown&quot;,</span><br><span class="line">      &quot;ryl02,fng01,Queen doll,0,12 inch queen doll with royal garments and crown&quot;</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    val productsRdd = sc.parallelize(products_data).map(_.split(&quot;,&quot;)).map(p =&gt; Row(p(0), p(1), p(2), p(3).toDouble, p(4)))</span><br><span class="line">    val productsFields = Array(</span><br><span class="line">      StructField(&quot;prod_id&quot;,StringType,true),</span><br><span class="line">      StructField(&quot;vend_id&quot;,StringType,true),</span><br><span class="line">      StructField(&quot;prod_name&quot;,StringType,true),</span><br><span class="line">      StructField(&quot;prod_price&quot;,DoubleType,true),</span><br><span class="line">      //StructField(&quot;prod_price&quot;,StringType,true),</span><br><span class="line">      //StructField(&quot;prod_price&quot;,IntegerType,true),</span><br><span class="line">      StructField(&quot;prod_desc&quot;,StringType,true)//介绍</span><br><span class="line">    )</span><br><span class="line">    val productsSchema = StructType(productsFields)</span><br><span class="line">    val productsDf = ssc.createDataFrame(productsRdd,productsSchema)</span><br><span class="line">    productsDf.registerTempTable(&quot;Products&quot;)</span><br><span class="line"></span><br><span class="line">    productsDf.printSchema()</span><br><span class="line">    productsDf.show()</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select prod_name from Products&quot;).show</span><br><span class="line">    ssc.sql(&quot;select prod_id, prod_name,prod_price from Products&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products&quot;).show</span><br><span class="line">    ssc.sql(&quot;select vend_id from Products&quot;).show</span><br><span class="line">    ssc.sql(&quot;select distinct vend_id from Products&quot;).show //大小写敏感；作用于其后多列</span><br><span class="line">    ssc.sql(&quot;select prod_name from Products limit 5&quot;).show</span><br><span class="line">    ssc.sql(&quot;select prod_id, prod_name from Products order by prod_id desc,prod_price&quot;).show //select 语句的最后一个子句 ；作用于其后多列（可分别指定排序方式）；排序字段可为非显示列</span><br><span class="line">    ssc.sql(&quot;select prod_id, prod_name from Products order by 22 desc,prod_price&quot;).show //select 语句的最后一个子句 ；作用于其后多列（可分别指定排序方式）；排序字段可为非显示列</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_price = 3.49&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_price !&lt; 3.49&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_price &lt;= 5&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where vend_id != &apos;DLL01&apos;&quot;).show //字符串类型比较，使用单引号</span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_price between 5 and 10&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_price is null &quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_price is not null &quot;).show</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select * from Products where vend_id = &apos;DLL01&apos; or vend_id = &apos;BRS01&apos;&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where vend_id = &apos;DLL01&apos; or vend_id = &apos;BRS01&apos; and prod_price &gt; 10&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where (vend_id = &apos;DLL01&apos; or vend_id = &apos;BRS01&apos;) and prod_price &gt; 10&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where vend_id in (&apos;DLL01&apos;,&apos;BRS01&apos;)&quot;).show //建议优先使用in</span><br><span class="line">    ssc.sql(&quot;select * from Products where vend_id in (&apos;DLL01&apos;,&apos;BRS01&apos;) and prod_price &gt; 10&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where vend_id not in (&apos;DLL01&apos;,&apos;BRS01&apos;)&quot;).show //建议优先使用in</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_name like &apos;%doll%&apos;&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_price like &apos;%4%&apos;&quot;).show //不仅仅字符能用通配符</span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_name like &apos;__ inch teddy bear&apos;&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Products where prod_name like &apos;% inch teddy bear&apos;&quot;).show</span><br><span class="line">    ////ssc.sql(&quot;select * from Products where prod_name like &apos;1[2,8] inch teddy bear&apos;&quot;).show //不支持[]</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select prod_name  + &apos;-&apos; + prod_id from Products&quot;).show // 不支持列拼接</span><br><span class="line">    ssc.sql(&quot;select prod_name ,prod_price,prod_price*2 from Products&quot;).show // 执行运算 + - * /</span><br><span class="line">    ssc.sql(&quot;select prod_name ,prod_price,prod_price%2 from Products&quot;).show // 执行运算 + - * /</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select lower(prod_name),upper(prod_name),prod_price from Products&quot;).show //</span><br><span class="line">    ssc.sql(&quot;select trim(prod_name) from Products&quot;).show // 不支持去空格</span><br><span class="line">    ssc.sql(&quot;select prod_price, abs(prod_price), sqrt(prod_price) from Products&quot;).show</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select avg(prod_price) avg_price from Products&quot;).show //avg忽略为空的行 ，作用于字符串返回null</span><br><span class="line">    ssc.sql(&quot;select count(prod_price) c from Products&quot;).show //不忽略为空的行</span><br><span class="line">    ssc.sql(&quot;select max(prod_price) m from Products&quot;).show // 同min也可以作用于字符串列，分别返回第一行最后一行</span><br><span class="line">    ssc.sql(&quot;select sum(prod_name) s from Products&quot;).show //作用于字符串返回0.0</span><br><span class="line">    ssc.sql(&quot;select sum(distinct prod_price),count(distinct prod_price)from Products&quot;).show //avg，max，min 不支持去重后求值</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select vend_id ,count(*),max(prod_price),avg(prod_price) from Products group by vend_id&quot;).show</span><br><span class="line">    ssc.sql(&quot;select vend_id ,count(*) c,max(prod_price) m,avg(prod_price)  from Products where prod_price &gt; 0 group by vend_id having m &gt; 5 and c &gt; 2&quot;).show</span><br><span class="line">    ssc.sql(&quot;select vend_id ,count(*) c,max(prod_price) m,avg(prod_price)  from Products where prod_price &gt; 0 group by vend_id having m &gt; 5 order by c3&quot;).show</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select prod_name p from Products&quot;).show // 别名</span><br><span class="line">    ssc.sql(&quot;select prod_name,upper(prod_name),prod_price from Products&quot;).show //</span><br><span class="line"></span><br><span class="line">    val vendorsData = Array(</span><br><span class="line">      &quot;BRS01,Bears R Us,123 Main Street,Bear Town,MI,44444,USA&quot;,</span><br><span class="line">      &quot;BRE02,Bear Emporium,500 Park Street,Anytown,OH,44333,USA&quot;,</span><br><span class="line">      &quot;DLL01,Doll House Inc.,555 High Street,Dollsville,CA,99999,USA&quot;,</span><br><span class="line">      &quot;FRB01,Furball Inc.,1000 5th Avenue,New York,NY,11111,USA&quot;,</span><br><span class="line">      &quot;FNG01,Fun and Games,42 Galaxy Road,London,NULL,N16 6PS,England&quot;,</span><br><span class="line">      &quot;JTS01,Jouets et ours,1 Rue Amusement,Paris,NULL,45678,France&quot;</span><br><span class="line">    )</span><br><span class="line">    val vendorsRdd = sc.parallelize(vendorsData).map(_.split(&quot;,&quot;)).map(p =&gt; Row(p(0), p(1), p(2), p(3), p(4), p(5), p(6)))</span><br><span class="line">    val vendorsFields = Array(</span><br><span class="line">      StructField(&quot;vend_id&quot;,StringType,false),</span><br><span class="line">      StructField(&quot;vend_name&quot;,StringType,false),</span><br><span class="line">      StructField(&quot;vend_address&quot;,StringType,true),</span><br><span class="line">      StructField(&quot;vend_city&quot;,StringType,true),</span><br><span class="line">      StructField(&quot;vend_state&quot;,StringType,true),</span><br><span class="line">      StructField(&quot;vend_zip&quot;,StringType,true),</span><br><span class="line">      StructField(&quot;vend_country&quot;,StringType,true))</span><br><span class="line">    val vendorsSchema = StructType(vendorsFields)</span><br><span class="line">    val vendorsDf = ssc.createDataFrame(vendorsRdd,vendorsSchema)</span><br><span class="line">    vendorsDf.registerTempTable(&quot;Vendors&quot;)</span><br><span class="line"></span><br><span class="line">    vendorsDf.printSchema()</span><br><span class="line">    vendorsDf.show()</span><br><span class="line">    ssc.sql(&quot;select vend_id from Products group by vend_id having avg(prod_price) &gt; 3&quot;).show</span><br><span class="line">    // ssc.sql(&quot;select * from Vendors where vend_id in (select vend_id from Products group by vend_id having avg(prod_price) &gt; 3)&quot;).show //subquery在2.0支持https://issues.apache.org/jira/browse/SPARK-4226</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select vend_name,prod_name,prod_price from Vendors v,Products p where v.vend_id = p.vend_id &quot;).show</span><br><span class="line">    ssc.sql(&quot;select vend_name,prod_name,prod_price from Vendors v inner join Products p on v.vend_id = p.vend_id &quot;).show</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select vend_name,prod_name,prod_price from Vendors v left join Products p on v.vend_id = p.vend_id &quot;).show</span><br><span class="line">    ssc.sql(&quot;select vend_name,prod_name,prod_price from Vendors v right outer join Products p on v.vend_id = p.vend_id &quot;).show</span><br><span class="line">    ssc.sql(&quot;select vend_name,prod_name,prod_price from Vendors v full outer join Products p on v.vend_id = p.vend_id &quot;).show</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select vend_name ,count(prod_id) c  from Products p left outer join  Vendors v on v.vend_id = p.vend_id group by vend_name&quot;).show</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;select * from Vendors v where vend_id = &apos;JTS01&apos; or vend_state= &apos;MI&apos;&quot;).unionAll(ssc.sql(&quot;select * from Vendors v where v.vend_state in (&apos;MI&apos;,&apos;OH&apos;)&quot;)).show</span><br><span class="line">    ssc.sql(&quot;select * from Vendors v where vend_id = &apos;JTS01&apos; or vend_state= &apos;MI&apos; union select * from Vendors v where v.vend_state in (&apos;MI&apos;,&apos;OH&apos;)&quot;).show</span><br><span class="line">    ssc.sql(&quot;select * from Vendors v where vend_id = &apos;JTS01&apos; or vend_state= &apos;MI&apos; union all select * from Vendors v where v.vend_state in (&apos;MI&apos;,&apos;OH&apos;)&quot;).show</span><br><span class="line"></span><br><span class="line">    ssc.sql(&quot;INSERT into table Vendors select * from Vendors&quot;).show</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
-
+    
     <div class="post-footer">
         <div>
             
-                声明：欢迎转载、重新发布。如用于商业目的，请<a href="mailto:xuemin.zhang@foxmail.com" target="_blank">联系作者</a>获得授权。非商业目的，请务必保留文章作者署名(<a href="https://zhangxuemin.cn" target="_blank">张学敏</a>)及链接(https://zhangxuemin.cn)。
+            声明：
+            欢迎转载、重新发布。如用于商业目的，请<a href="mailto:xuemin.zhang@foxmail.com" target="_blank">联系作者</a>获得授权。非商业目的，请务必保留文章作者署名(<a href="https://zhangxuemin.cn" target="_blank">张学敏</a>)及链接(https://zhangxuemin.cn)。
+            
             
         </div>
         <div>
@@ -240,65 +243,61 @@
         </div>
     </div>
 </article>
-
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2016/07/29/大数据/Spark/Parquet简介/" class="pre-post btn btn-default" title='深入浅出Parquet Schema'>
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">深入浅出Parquet Schema</span>
-        </a>
+    <a href="/2016/07/29/大数据/Spark/Parquet简介/" class="pre-post btn btn-default" title='深入浅出Parquet Schema'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            深入浅出Parquet Schema</span>
+    </a>
     
     
-        <a href="/2016/05/16/大数据/Spark/让Spark Streaming在YARN上长时间运行/" class="next-post btn btn-default" title='让Spark Streaming在YARN上长时间运行'>
-            <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">让Spark Streaming在YARN上长时间运行</span><i class="fa fa-angle-right fa-fw"></i>
-        </a>
+    <a href="/2016/05/16/大数据/Spark/让Spark Streaming在YARN上长时间运行/" class="next-post btn btn-default" title='让Spark Streaming在YARN上长时间运行'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            让Spark Streaming在YARN上长时间运行</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
     
 </div>
 
-
-    <div id="comments">
-        
+<div id="comments">
     
-    <div id="vcomments" class="valine"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+<div id="vcomments" class="valine"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
 <script src="/assets/valine.min.js"></script>
-
-    <script>
-        new Valine({
-            av: AV,
-            el: '#vcomments',
-            appId: 'Wf244rKqAfDvqO3ID8IMPpHC-gzGzoHsz',
-            appKey: 'a3FFMqGAk68xa9qyPfw0Cw6N',
-            placeholder: '发表评论',
-            notify: false,
-            verify: false,
-            avatar: 'mm',
-            meta: 'nick,mail'.split(','),
-            pageSize: '10',
-            path: window.location.pathname,
-            lang: 'zh-CN'.toLowerCase()
-        })
-    </script>
-
-
-    </div>
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+    appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+    placeholder: '说点什么吧',
+    notify: false,
+    verify: true,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
 
 
-
-
+</div>
 
                 </main>
                 
                     <aside id="article-toc" role="navigation" class="col-md-4">
     <div class="widget">
-        <h3 class="title">文章目录</h3>
+        <h3 class="title">
+            文章目录
+        </h3>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、测试总结"><span class="toc-text">一、测试总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、测试数据"><span class="toc-text">二、测试数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、测试sql及结果"><span class="toc-text">三、测试sql及结果</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、测试总结"><span class="toc-text">一、测试总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、测试数据"><span class="toc-text">二、测试数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、测试sql及结果"><span class="toc-text">三、测试sql及结果</span></a></li></ol>
         
     </div>
 </aside>
-
                 
             </div>
         </div>
@@ -309,24 +308,21 @@
         </div>
     </div>
 </footer>
-
 <a id="back-to-top" class="icon-btn hide">
-	<i class="fa fa-chevron-up"></i>
+    <i class="fa fa-chevron-up"></i>
 </a>
-
-
-
-
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <div class="copyright">
     <div class="container">
-    
-
-        Since<span>2015 | <span>ZhangXueMin</span> | <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span>总访问量<span id="busuanzi_value_site_pv"></span>次
+        Since<span>2015 | <span>ZhangXueMin</span> | <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span>总访问量
+        <span id="busuanzi_value_site_pv"></span>次
     </div>
 </div>
+
+
+
+
 
 
 

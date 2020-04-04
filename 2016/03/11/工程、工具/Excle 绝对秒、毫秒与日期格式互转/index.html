@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="数大招疯">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.1">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+<meta name="keywords" content="Excle" />
+
+
+<meta name="description" content="
+时间戳转成正常日期的公式:日期单元格=(时间戳单元格+83600)/86400+70365+19
+
+正常日期转为时间戳格式公式：时间戳单元格=(日期单元格-70365-19)86400-8*3..." />
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+<title>
+    
+    Excle时间戳(绝对秒、毫秒)与日期格式互转 |
+    
+    数大招疯
+</title>
+
+<link rel="alternate" href="/atom.xml" title="数大招疯" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header"  style="background-image:url(
+    https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1536170179765&amp;di=ab07d5f5a24a9d2bab9d1473a74e006c&amp;imgtype=0&amp;src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F04%2F20%2F33%2F9e0ba3e5c577b49250f84a20a11f079c.jpg)"
+     >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='XueMin Zhang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                数大招疯
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">
+                        数大招疯</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                首页</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/编程基础/"><i class="fa "></i>
+                                编程基础</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/大数据/"><i class="fa "></i>
+                                大数据</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/数据科学"><i class="fa "></i>
+                                数据科学</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/图存储、计算"><i class="fa "></i>
+                                图存储、计算</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/工程、工具"><i class="fa "></i>
+                                工程、工具</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/categories/打卡"><i class="fa "></i>
+                                打卡</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa "></i>
+                                时间轴</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Excle时间戳(绝对秒、毫秒)与日期格式互转">
+            
+            Excle时间戳(绝对秒、毫秒)与日期格式互转
+            
+        </h1>
+        <div class="post-meta">
+    
+      
+
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/工程、工具">
+            工程、工具
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Excle/">Excle</a>
+            
+        </span>
+    </span>
+    
+    <span>
+
+     🕒 2016年03月11日
+    </span>
+
+
+
+    
+    
+
+
+    
+    
+</div>
+
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <ul>
+<li><p>时间戳转成正常日期的公式:<br>日期单元格=(时间戳单元格+8<em>3600)/86400+70</em>365+19</p>
+</li>
+<li><p>正常日期转为时间戳格式公式：<br>时间戳单元格=(日期单元格-70<em>365-19)</em>86400-8*3600</p>
+</li>
+</ul>
+<p>以上公式适用于时间戳长度是10位，即绝对秒数，绝对毫秒做对应转换即可，比如<br>日期单元格=(时间戳单元格/1000+8<em>3600)/86400+70</em>365+19</p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            声明：
+            欢迎转载、重新发布。如用于商业目的，请<a href="mailto:xuemin.zhang@foxmail.com" target="_blank">联系作者</a>获得授权。非商业目的，请务必保留文章作者署名(<a href="https://zhangxuemin.cn" target="_blank">张学敏</a>)及链接(https://zhangxuemin.cn)。
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2016/03/17/大数据/一组图详解元数据、主数据与参考数据/" class="pre-post btn btn-default" title='一组图详解元数据、主数据与参考数据'>
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            一组图详解元数据、主数据与参考数据</span>
+    </a>
+    
+    
+    <a href="/2016/03/11/大数据/Hive/Hive HQL常用语句/" class="next-post btn btn-default" title='Excle时间戳(绝对秒、毫秒)与日期格式互转'>
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            Excle时间戳(绝对秒、毫秒)与日期格式互转</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<div id="vcomments" class="valine"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+<script>
+new Valine({
+    av: AV,
+    el: '#vcomments',
+    appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+    appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+    placeholder: '说点什么吧',
+    notify: false,
+    verify: true,
+    avatar: 'mm',
+    meta: 'nick,mail'.split(','),
+    pageSize: '10',
+    path: window.location.pathname,
+    lang: 'zh-CN'.toLowerCase()
+})
+</script>
+
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            文章目录
+        </h3>
+        
+        <p>暂无目录</p>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+    <div class="container">
+        Since<span>2015 | <span>ZhangXueMin</span> | <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span>总访问量
+        <span id="busuanzi_value_site_pv"></span>次
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

@@ -47,17 +47,16 @@ h4,
 h5,
 h6 {
   font-weight: 400;
+  color: #303030;
 }
 h1 {
-  font-size: 2.5em;
-  color: #333;  
-  font-weight:bold;  
+  font-size: 2em;
 }
 h2 {
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 h3 {
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 h4 {
   font-size: 1em;
@@ -278,9 +277,9 @@ pre {
   overflow: hidden;
   white-space: nowrap;
   background-image: -webkit-linear-gradient(left, #cddc39, #e67e22 25%, #cddc39 50%, #e67e22 75%, #cddc39) !important;
-  -webkit-text-fill-color: transparent!important;
-  -webkit-background-clip: text!important;
-  background-size: 200% 100%!important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-background-clip: text !important;
+  background-size: 200% 100% !important;
   animation: masked-animation 2s infinite linear !important;
 }
 .main-header .main-header-box .branding h2:hover {
@@ -329,9 +328,7 @@ pre {
   color: #505050;
   line-height: 4em;
   display: block;
-  padding: 0 16px;
-  font-size: 16px;
-  font-weight:bold;
+  padding: 0 21px;
 }
 .main-navigation .menu li:hover > a {
   color: #e67e22;
@@ -393,6 +390,11 @@ pre {
   background: #fff;
   padding: 10px 0;
   margin-bottom: 10px;
+}
+.main-content .breadcrumb {
+  padding-left: 20px;
+  font-size: 16px;
+  line-height: 2em;
 }
 .post {
   padding: 20px;
@@ -482,7 +484,7 @@ pre {
 .post .post-body p {
   font-size: 1em;
   line-height: 1.5;
-  letter-spacing: 0.1px;
+  word-break: break-all;
 }
 .post .post-body p img {
   max-width: 100%;
@@ -518,57 +520,49 @@ pre {
   main post content
 ====================================================*/
 .post-content {
-  font: 400 16px/1.62 "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
+  font: 400 16px/1.62 "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
   color: #333;
 }
 .post-content h1 {
-  font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
-  font-size: 3.5em;
+  font-family: "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
   color: #333;
+  font-size: 1.8em;
   margin: 0.67em 0;
 }
 .post-content h2 {
-  font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
-  background-color: #f9f9f9;
-  border-color: #00bc9d;
-  border-width: 0px;
-  border-style:solid;
-  border-left-width: 4px;
-  font-weight:bold;
+  font-family: "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
+  color: #333;
   font-size: 1.5em;
-  margin: 0.5em 0;
-  padding: 8px;
+  margin: 0.83em 0;
 }
 .post-content h3 {
-  font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
+  font-family: "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
   color: #333;
-  font-weight:bold;  
-  font-size: 1.3em;
+  font-size: 1.17em;
   margin: 1em 0;
 }
 .post-content h4 {
-  font-family:"Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
+  font-family: "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
   color: #333;
-  font-weight:bold;
   font-size: 1em;
   margin: 1.6em 0 1em 0;
 }
 .post-content h5 {
-  font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
+  font-family: "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
   color: #333;
   font-size: 1em;
   margin: 1.6em 0 1em 0;
 }
 .post-content h6 {
-  font-family: "Microsoft YaHei","Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
+  font-family: "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", "SimSun", sans-serif;
   color: #333;
   font-size: 1em;
-  margin: 1em 0 1em 0;
-  font-weight: 100;
+  margin: 1.6em 0 1em 0;
+  font-weight: 500;
 }
-.post-content h1 {
+.post-content > h1 {
   margin-top: 0;
-  font-size: 2.5em;
+  font-size: 2em;
 }
 .post-content p {
   font-size: 15px;
@@ -735,6 +729,8 @@ pre {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  table-layout: fixed;
+  word-wrap: break-word;
 }
 .post-content th {
   text-align: left;
@@ -819,7 +815,7 @@ pre {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  font-size: .9em;
+  font-size: 0.9em;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
@@ -836,7 +832,7 @@ pre {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
-  padding: .5rem 2rem;
+  padding: 0.5rem 2rem;
   color: #808080;
 }
 #comments .v .vcontrol .vbtn:hover {
@@ -922,7 +918,7 @@ pre {
   border: 1px solid #ebebeb;
   padding: 2px 7px;
   color: #959595;
-  font-size: 1em!important;
+  font-size: 1em !important;
   line-height: 1.5em;
   display: inline-block;
   margin: 0 5px 5px 0;
@@ -1068,6 +1064,9 @@ pre {
   color: #e67e22;
   margin: 0 2px;
 }
+.widget .notification img {
+  max-width: 100%;
+}
 /*====================================================
    toc
 ====================================================*/
@@ -1117,7 +1116,7 @@ pre {
   border-top: 1px solid #303030;
 }
 .copyright span {
-  margin: 0 .5em;
+  margin: 0 0.5em;
 }
 .copyright a {
   color: #666666;
@@ -1153,6 +1152,105 @@ pre {
 }
 #toc-btn {
   bottom: 65px;
+}
+/*====================================================
+    post reward
+====================================================*/
+.reward {
+  padding: 5px 0;
+}
+.reward .reward-wrap {
+  position: relative;
+  display: block;
+  font-size: 30px;
+  width: 62px;
+  height: 62px;
+  line-height: 60px;
+  margin: 0 auto;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  color: #ff8140;
+  -webkit-user-select: none;
+  border: 1px solid #d9d9d9;
+  -webkit-box-shadow: 0 0 2px #d9d9d9;
+  -moz-box-shadow: 0 0 2px #d9d9d9;
+  box-shadow: 0 0 2px #d9d9d9;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.reward .reward-wrap .reward-box {
+  position: absolute;
+  top: -220px;
+  left: 50%;
+  display: none;
+  width: 350px;
+  height: 200px;
+  margin-left: -175px;
+  padding: 15px;
+  border: 1px solid #e6e6e6;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 1px 1px #efefef;
+  -moz-box-shadow: 0 1px 1px 1px #efefef;
+  box-shadow: 0 1px 1px 1px #efefef;
+}
+.reward .reward-wrap .reward-box span {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+}
+.reward .reward-wrap .reward-box span img {
+  display: inline-block;
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  border: 0;
+}
+.reward .reward-wrap .reward-box span b {
+  font-size: 14px;
+  line-height: 26px;
+  display: block;
+  text-align: center;
+  color: #666;
+}
+.reward .reward-wrap .reward-box:before,
+.reward .reward-wrap .reward-box:after {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+}
+.reward .reward-wrap .reward-box:before {
+  bottom: -20px;
+  left: 50%;
+  margin-left: -10px;
+  border-top-color: #e6e6e6;
+}
+.reward .reward-wrap .reward-box:after {
+  bottom: -19px;
+  left: 50%;
+  margin-left: -10px;
+  border-top-color: #fff;
+}
+.reward .reward-wrap:hover {
+  color: #fff;
+  background-color: #ff8140;
+  border: 1px solid #ff8140;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.reward .reward-wrap:hover .reward-box {
+  display: block;
+}
+.reward .reward-tip {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #969696;
+  margin: 15px auto;
+  text-align: center;
+  min-height: 24px;
 }
 /*====================================================
     timeline
@@ -1450,7 +1548,7 @@ pre .javascript .function {
     text-align: left;
   }
   .post .post-head h1 {
-    line-height: 2.3em;
+    line-height: 1.25em;
   }
   .post .post-content p.brief {
     text-overflow: ellipsis;
